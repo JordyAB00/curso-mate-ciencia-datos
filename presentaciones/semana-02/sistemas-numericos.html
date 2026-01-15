@@ -1030,48 +1030,63 @@ Salarios normalizados:"</span>)
                 <p class="slide-subtitle">Guía práctica</p>
             </div>
             <div class="slide-content">
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Característica</th>
-                                <th>Listas Python</th>
-                                <th>NumPy Arrays</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Tipos de datos</strong></td>
-                                <td>Heterogéneos (mixtos)</td>
-                                <td>Homogéneos (un solo tipo)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Memoria</strong></td>
-                                <td>Dispersa (punteros)</td>
-                                <td>Contigua (bloque)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Velocidad numérica</strong></td>
-                                <td>Lenta (loops Python)</td>
-                                <td>20-50x más rápida</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Operaciones matemáticas</strong></td>
-                                <td>Requiere loops</td>
-                                <td>Vectorizadas</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Dimensiones</strong></td>
-                                <td>Solo 1D (o anidadas)</td>
-                                <td>Multidimensionales nativas</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Uso ideal</strong></td>
-                                <td>Datos mixtos, <10k elementos</td>
-                                <td>Cálculos, datasets grandes</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="two-columns">
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Característica</th>
+                                    <th>Listas Python</th>
+                                    <th>NumPy Arrays</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Tipos</strong></td>
+                                    <td>Mixtos</td>
+                                    <td>Un solo tipo</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Memoria</strong></td>
+                                    <td>Dispersa</td>
+                                    <td>Contigua</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Velocidad</strong></td>
+                                    <td>Lenta</td>
+                                    <td>20-50x más rápida</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Característica</th>
+                                    <th>Listas Python</th>
+                                    <th>NumPy Arrays</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Operaciones</strong></td>
+                                    <td>Requiere loops</td>
+                                    <td>Vectorizadas</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dimensiones</strong></td>
+                                    <td>Solo 1D</td>
+                                    <td>Multidimensional</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Uso ideal</strong></td>
+                                    <td>Datos mixtos</td>
+                                    <td>Cálculos grandes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="highlight-box" style="margin-top: 20px;">
                     <p>Regla general: usa listas para colecciones pequeñas de datos mixtos, NumPy para operaciones matemáticas intensivas o datasets grandes.</p>
