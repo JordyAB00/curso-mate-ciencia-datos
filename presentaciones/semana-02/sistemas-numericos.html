@@ -471,49 +471,67 @@
                 <p class="slide-subtitle">Versión actual: enero 2026</p>
             </div>
             <div class="slide-content">
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Tipo NumPy</th>
-                                <th>Conjunto matemático</th>
-                                <th>Bits</th>
-                                <th>Rango / Precisión</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>np.int8</strong></td>
-                                <td>ℤ (limitado)</td>
-                                <td>8</td>
-                                <td>-128 a 127</td>
-                            </tr>
-                            <tr>
-                                <td><strong>np.int64</strong></td>
-                                <td>ℤ (limitado)</td>
-                                <td>64</td>
-                                <td>±9.22 × 10¹⁸</td>
-                            </tr>
-                            <tr>
-                                <td><strong>np.float32</strong></td>
-                                <td>ℝ (aprox.)</td>
-                                <td>32</td>
-                                <td>~7 dígitos, ±10³⁸</td>
-                            </tr>
-                            <tr>
-                                <td><strong>np.float64</strong></td>
-                                <td>ℝ (aprox.)</td>
-                                <td>64</td>
-                                <td>~15 dígitos, ±10³⁰⁸</td>
-                            </tr>
-                            <tr>
-                                <td><strong>np.complex128</strong></td>
-                                <td>ℂ</td>
-                                <td>128</td>
-                                <td>Dos float64</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="two-columns">
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tipo NumPy</th>
+                                    <th>Conjunto</th>
+                                    <th>Bits</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>np.int8</strong></td>
+                                    <td>ℤ</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>np.int16</strong></td>
+                                    <td>ℤ</td>
+                                    <td>16</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>np.int32</strong></td>
+                                    <td>ℤ</td>
+                                    <td>32</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>np.int64</strong></td>
+                                    <td>ℤ</td>
+                                    <td>64</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>np.float32</strong></td>
+                                    <td>ℝ</td>
+                                    <td>32</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>np.float64</strong></td>
+                                    <td>ℝ</td>
+                                    <td>64</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>np.complex128</strong></td>
+                                    <td>ℂ</td>
+                                    <td>128</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="content-box">
+                        <h3>Rangos importantes</h3>
+                        <ul>
+                            <li><strong>int8:</strong> -128 a 127</li>
+                            <li><strong>int16:</strong> -32,768 a 32,767</li>
+                            <li><strong>int32:</strong> ±2.1 × 10⁹</li>
+                            <li><strong>int64:</strong> ±9.2 × 10¹⁸</li>
+                            <li><strong>float32:</strong> ~7 dígitos</li>
+                            <li><strong>float64:</strong> ~15 dígitos</li>
+                            <li><strong>complex128:</strong> Dos float64</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="code-box" style="margin-top: 20px;">
 <span class="keyword">import</span> numpy <span class="keyword">as</span> np
@@ -537,7 +555,7 @@
             <div class="slide-content">
                 <div class="two-columns">
                     <div class="code-box">
-<span class="comment"># ❌ Forma lenta: loop Python</span>
+<span class="comment"># Forma lenta: loop Python</span>
 <span class="keyword">lista</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]
 <span class="keyword">cuadrados</span> = []
 <span class="keyword">for</span> x <span class="keyword">in</span> lista:
@@ -546,13 +564,13 @@
 <span class="comment"># [1, 4, 9, 16, 25]</span>
                     </div>
                     <div class="code-box">
-<span class="comment"># ✅ Forma rápida: vectorizada</span>
+<span class="comment"># Forma rápida: vectorizada</span>
 <span class="keyword">arr</span> = np.<span class="keyword">array</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])
 <span class="keyword">cuadrados</span> = arr ** <span class="number">2</span>
 <span class="keyword">print</span>(cuadrados)
 <span class="comment"># [ 1  4  9 16 25]</span>
 
-<span class="comment"># ¡Una sola línea!</span>
+<span class="comment"># Una sola línea</span>
                     </div>
                 </div>
                 <div class="code-box" style="margin-top: 20px;">
@@ -975,30 +993,30 @@ Salarios normalizados:"</span>)
 <span class="keyword">import</span> numpy <span class="keyword">as</span> np
 <span class="keyword">from</span> numpy.typing <span class="keyword">import</span> NDArray
 
-<span class="comment"># ✅ 1. Operaciones vectorizadas (no loops)</span>
+<span class="comment"># 1. Operaciones vectorizadas (no loops)</span>
 <span class="keyword">arr</span> = np.<span class="keyword">arange</span>(<span class="number">1_000_000</span>)
 <span class="keyword">result</span> = np.<span class="keyword">square</span>(arr)  <span class="comment"># NO: [x**2 for x in arr]</span>
 
-<span class="comment"># ✅ 2. Especificar dtypes explícitamente</span>
+<span class="comment"># 2. Especificar dtypes explícitamente</span>
 <span class="keyword">datos</span> = np.<span class="keyword">array</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=np.float32)  <span class="comment"># Eficiente en memoria</span>
 
-<span class="comment"># ✅ 3. Operaciones in-place cuando sea posible</span>
+<span class="comment"># 3. Operaciones in-place cuando sea posible</span>
 <span class="keyword">arr</span> += <span class="number">5</span>  <span class="comment"># NO: arr = arr + 5 (crea copia)</span>
 
-<span class="comment"># ✅ 4. Broadcasting en lugar de tile/repeat</span>
+<span class="comment"># 4. Broadcasting en lugar de tile/repeat</span>
 <span class="keyword">a</span> = np.<span class="keyword">array</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])
 <span class="keyword">b</span> = np.<span class="keyword">array</span>([[<span class="number">1</span>], [<span class="number">2</span>], [<span class="number">3</span>]])
 <span class="keyword">result</span> = a + b  <span class="comment"># Broadcasting automático</span>
 
-<span class="comment"># ✅ 5. Comparación de punto flotante con tolerancia</span>
+<span class="comment"># 5. Comparación de punto flotante con tolerancia</span>
 <span class="keyword">print</span>(np.<span class="keyword">isclose</span>(<span class="number">0.1</span> + <span class="number">0.2</span>, <span class="number">0.3</span>))  <span class="comment"># True</span>
 <span class="comment"># NO usar: 0.1 + 0.2 == 0.3  # False por error de redondeo</span>
 
-<span class="comment"># ✅ 6. Type hints modernos</span>
+<span class="comment"># 6. Type hints modernos</span>
 <span class="keyword">def</span> <span class="keyword">procesar</span>(data: NDArray[np.float64]) -> NDArray[np.float64]:
     <span class="keyword">return</span> np.<span class="keyword">sqrt</span>(data)
 
-<span class="comment"># ✅ 7. Casting seguro (NumPy 2.4+)</span>
+<span class="comment"># 7. Casting seguro (NumPy 2.4+)</span>
 <span class="keyword">arr</span> = np.<span class="keyword">array</span>([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>], dtype=np.int64)
 <span class="keyword">arr_float</span> = arr.<span class="keyword">astype</span>(np.float64, casting=<span class="string">"same_value"</span>)  <span class="comment"># Previene pérdida de datos</span>
                 </div>
