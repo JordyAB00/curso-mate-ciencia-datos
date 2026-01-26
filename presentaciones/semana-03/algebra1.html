@@ -292,13 +292,9 @@
             z-index: 1000;
         }
 
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(90deg, #2d2d2d, #FF8C00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .logo-image {
+            max-width: 120px;
+            height: auto;
         }
 
         .slide-number {
@@ -381,7 +377,7 @@
 </head>
 <body>
     <div class="logo-area">
-        <div class="logo-text">LEAD</div>
+        <img src="../../assets/images/lead-logo.png" alt="Lead University" class="logo-image">
     </div>
 
     <div class="slide-number">
@@ -748,9 +744,9 @@
 
 <span class="keyword">x</span> = <span class="keyword">symbols</span>(<span class="string">'x'</span>)
 
-<span class="comment"># Ecuación cuadrática: x² - 4 = 0</span>
-<span class="keyword">soluciones</span> = <span class="keyword">solve</span>(x**<span class="number">2</span> - <span class="number">4</span>, x)
-<span class="keyword">print</span>(soluciones)  
+<span class="comment"># Ecuación: x² - 4 = 0</span>
+<span class="keyword">sol</span> = <span class="keyword">solve</span>(x**<span class="number">2</span> - <span class="number">4</span>, x)
+<span class="keyword">print</span>(sol)  
 <span class="comment"># [-2, 2]</span>
 
 <span class="comment"># Sistema de ecuaciones</span>
@@ -769,46 +765,28 @@
 
 <span class="keyword">x</span> = <span class="keyword">symbols</span>(<span class="string">'x'</span>)
 
-<span class="comment"># Retorna conjunto matemático</span>
-<span class="keyword">sol</span> = <span class="keyword">solveset</span>(x**<span class="number">2</span> - <span class="number">4</span>, x, 
-                domain=S.Reals)
+<span class="comment"># Retorna conjunto</span>
+<span class="keyword">sol</span> = <span class="keyword">solveset</span>(
+    x**<span class="number">2</span> - <span class="number">4</span>, 
+    x, 
+    domain=S.Reals
+)
 <span class="keyword">print</span>(sol)  
 <span class="comment"># FiniteSet(-2, 2)</span>
 
-<span class="comment"># Ventaja: maneja ∞ mejor</span>
-<span class="keyword">sol2</span> = <span class="keyword">solveset</span>(<span class="keyword">sin</span>(x), x,
-                 domain=S.Reals)
-<span class="keyword">print</span>(sol2)
-<span class="comment"># ImageSet con infinitas soluciones</span>
+<span class="comment"># Maneja infinitas mejor</span>
+<span class="keyword">sol2</span> = <span class="keyword">solveset</span>(
+    <span class="keyword">sin</span>(x), 
+    x,
+    domain=S.Reals
+)
+<span class="comment"># ImageSet con ∞ soluciones</span>
                     </div>
                 </div>
-                <div class="comparison-table" style="margin-top: 20px;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Característica</th>
-                                <th>solve()</th>
-                                <th>solveset()</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Salida</strong></td>
-                                <td>Lista</td>
-                                <td>Conjunto matemático</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Sistemas</strong></td>
-                                <td>Sí (múltiples variables)</td>
-                                <td>No (una variable)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Recomendación</strong></td>
-                                <td>Para sistemas</td>
-                                <td>Para ecuaciones simples</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="content-box" style="margin-top: 20px;">
+                    <h3>Diferencias clave</h3>
+                    <p><strong>solve():</strong> Retorna lista, puede resolver sistemas (múltiples variables). Usa para sistemas de ecuaciones.</p>
+                    <p style="margin-top: 10px;"><strong>solveset():</strong> Retorna conjunto matemático, una variable solamente, maneja mejor casos con infinitas soluciones. Más moderno y recomendado para ecuaciones simples.</p>
                 </div>
             </div>
         </div>
@@ -1048,54 +1026,33 @@ Gradiente promedio ∂E/∂m: </span>{np.<span class="keyword">mean</span>(gradi
                 <p class="slide-subtitle">¿Cuándo usar cada una?</p>
             </div>
             <div class="slide-content">
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Característica</th>
-                                <th>SymPy</th>
-                                <th>SageMath</th>
-                                <th>Mathematica</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Costo</strong></td>
-                                <td>Gratis, open source</td>
-                                <td>Gratis, open source</td>
-                                <td>$$$ Comercial</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Instalación</strong></td>
-                                <td>pip install sympy</td>
-                                <td>Compleja (distro completa)</td>
-                                <td>Sencilla (licencia cara)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Integración Python</strong></td>
-                                <td>Nativa (ES Python)</td>
-                                <td>Buena (wrapper)</td>
-                                <td>Limitada (Wolfram lang)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Rendimiento</strong></td>
-                                <td>Moderado</td>
-                                <td>Alto</td>
-                                <td>Muy alto</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ideal para</strong></td>
-                                <td>Educación, integración ML</td>
-                                <td>Investigación avanzada</td>
-                                <td>Producción comercial</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="three-columns">
+                    <div class="feature-card">
+                        <h4>SymPy</h4>
+                        <p><strong>Costo:</strong> Gratis</p>
+                        <p><strong>Instalación:</strong> pip install</p>
+                        <p><strong>Python:</strong> Nativo</p>
+                        <p><strong>Velocidad:</strong> Moderada</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>SageMath</h4>
+                        <p><strong>Costo:</strong> Gratis</p>
+                        <p><strong>Instalación:</strong> Compleja</p>
+                        <p><strong>Python:</strong> Buena</p>
+                        <p><strong>Velocidad:</strong> Alta</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Mathematica</h4>
+                        <p><strong>Costo:</strong> $$$</p>
+                        <p><strong>Instalación:</strong> Sencilla</p>
+                        <p><strong>Python:</strong> Limitada</p>
+                        <p><strong>Velocidad:</strong> Muy alta</p>
+                    </div>
                 </div>
                 <div class="two-columns" style="margin-top: 20px;">
                     <div class="key-point">
                         <h4>Ventajas de SymPy para este curso</h4>
-                        <p>Instalación trivial en Google Colab, integración perfecta con NumPy/Pandas/Matplotlib, curva de aprendizaje suave.</p>
+                        <p>Instalación trivial en Google Colab, integración perfecta con NumPy, Pandas y Matplotlib, curva de aprendizaje suave.</p>
                     </div>
                     <div class="key-point">
                         <h4>Limitaciones de SymPy</h4>
