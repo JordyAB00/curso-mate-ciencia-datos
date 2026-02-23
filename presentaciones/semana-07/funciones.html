@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semana 7: Concepto general de función con Python - Matemática básica para ciencia de datos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #f5f5f7;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 80px 140px 80px;
+            background: #f5f5f7;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide-header {
+            margin-bottom: 40px;
+        }
+
+        .slide-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #2d2d2d;
+            margin-bottom: 12px;
+        }
+
+        .slide-subtitle {
+            font-size: 20px;
+            color: #6e6e73;
+            font-weight: 300;
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 280px);
+        }
+
+        .content-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #e5e5e7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .content-box h3 {
+            font-size: 24px;
+            color: #2d2d2d;
+            margin-bottom: 12px;
+        }
+
+        .content-box p {
+            font-size: 16px;
+            color: #1d1d1f;
+            line-height: 1.5;
+        }
+
+        .content-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-box li {
+            font-size: 16px;
+            color: #1d1d1f;
+            line-height: 1.6;
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .content-box li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #FF8C00;
+            font-size: 20px;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff5e6, #ffffff);
+            border-left: 4px solid #FF8C00;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .highlight-box p {
+            font-size: 17px;
+            color: #2d2d2d;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .key-point {
+            background: #ffffff;
+            border-left: 4px solid #FF8C00;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e5e7;
+            border-left: 4px solid #FF8C00;
+        }
+
+        .key-point h4 {
+            color: #2d2d2d;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .key-point p {
+            color: #1d1d1f;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .comparison-table {
+            background: #ffffff;
+            border-radius: 15px;
+            overflow: visible;
+            border: 1px solid #e5e5e7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .comparison-table thead tr:first-child th:first-child {
+            border-top-left-radius: 15px;
+        }
+
+        .comparison-table thead tr:first-child th:last-child {
+            border-top-right-radius: 15px;
+        }
+
+        .comparison-table tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 15px;
+        }
+
+        .comparison-table tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 15px;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(90deg, #2d2d2d, #FF8C00);
+            color: #ffffff;
+            padding: 12px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            font-size: 14px;
+            color: #1d1d1f;
+            border-bottom: 1px solid #f5f5f7;
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .code-box {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            color: #d4d4d4;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            text-align: left;
+            overflow: visible;
+            height: auto;
+            min-height: fit-content;
+        }
+
+        .code-box .comment { color: #6a9955; }
+        .code-box .keyword { color: #569cd6; }
+        .code-box .string  { color: #ce9178; }
+        .code-box .number  { color: #b5cea8; }
+        .code-box .func    { color: #dcdcaa; }
+        .code-box .orange  { color: #FF8C00; font-weight: bold; }
+
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #2d2d2d, #FF8C00);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .nav-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .logo-area {
+            position: fixed;
+            top: 15px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .logo-image {
+            max-width: 120px;
+            height: auto;
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: #6e6e73;
+            font-size: 16px;
+            z-index: 1000;
+            font-weight: 500;
+        }
+
+        .cover-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f7 50%, #ffffff 100%);
+            padding: 60px 80px 140px 80px;
+        }
+
+        .cover-title {
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #2d2d2d, #FF8C00, #2d2d2d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: gradient 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cover-subtitle {
+            font-size: 32px;
+            color: #6e6e73;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .cover-info {
+            font-size: 18px;
+            color: #1d1d1f;
+            margin-top: 30px;
+            line-height: 1.6;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 18px;
+            border: 1px solid #e5e5e7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.15);
+            border-color: #FF8C00;
+        }
+
+        .feature-card h4 {
+            font-size: 19px;
+            color: #2d2d2d;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #1d1d1f;
+            line-height: 1.4;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 100%);
+            border-radius: 12px;
+            padding: 20px 28px;
+            text-align: center;
+            color: #ffffff;
+            font-size: 22px;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .output-box {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: 'Courier New', monospace;
+            color: #58a6ff;
+            font-size: 13px;
+            margin-top: 10px;
+            border-left: 3px solid #238636;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #2d2d2d, #3d3d3d);
+            border-radius: 14px;
+            padding: 22px;
+            color: white;
+            text-align: center;
+        }
+
+        .stat-card .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #FF8C00;
+            margin-bottom: 6px;
+        }
+
+        .stat-card .stat-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .ml-card {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 14px;
+            padding: 18px;
+            color: white;
+            border-left: 4px solid #FF8C00;
+        }
+
+        .ml-card h4 {
+            color: #FF8C00;
+            font-size: 17px;
+            margin-bottom: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .ml-card p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #FF8C00;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .step-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 14px 18px;
+            border: 1px solid #e5e5e7;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #2d2d2d, #FF8C00);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .step-text h5 {
+            font-size: 16px;
+            color: #2d2d2d;
+            margin-bottom: 2px;
+        }
+
+        .step-text p {
+            font-size: 13px;
+            color: #6e6e73;
+        }
+
+        .arrow-connector {
+            text-align: center;
+            font-size: 22px;
+            color: #FF8C00;
+            font-weight: bold;
+            margin: 2px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-area">
+        <img src="../../assets/images/lead-logo.png" alt="Lead University" class="logo-image">
+    </div>
+
+    <div class="slide-number">
+        <span id="currentSlide">1</span> / <span id="totalSlides">13</span>
+    </div>
+
+    <div class="presentation-container">
+
+        <!-- Slide 1: Portada -->
+        <div class="slide cover-slide active">
+            <h1 class="cover-title">Funciones en Python</h1>
+            <p class="cover-subtitle">Semana 7: del concepto al código</p>
+            <div class="cover-info">
+                <p>TTCT0023 - Matemática básica para ciencia de datos<br>
+                Profesor: Jordy Alfaro Brenes<br>
+                Lead University<br>
+                I Cuatrimestre 2026</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Lo que vimos en el iPad -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Lo que vimos en el iPad, ahora en código</h2>
+                <p class="slide-subtitle">El puente entre la matemática y la programación</p>
+            </div>
+            <div class="slide-content">
+                <div class="three-columns">
+                    <div class="stat-card">
+                        <div class="stat-value">def / λ</div>
+                        <div class="stat-label">Funciones en Python</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">subs / evalf</div>
+                        <div class="stat-label">SymPy simbólico</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">lambdify</div>
+                        <div class="stat-label">Puente numérico</div>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p>En 45 minutos veremos cómo Python traduce cada concepto que trabajamos a mano: dominio, rango, evaluación, gráfica y composición de funciones.</p>
+                </div>
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Concepto matemático</th>
+                                <th>Herramienta Python</th>
+                                <th>Aplicación en ML/DS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>f: A → B (definición)</td>
+                                <td><code>def f(x): return ...</code></td>
+                                <td>Cualquier modelo predictivo</td>
+                            </tr>
+                            <tr>
+                                <td>Dominio y restricciones</td>
+                                <td><code>SymPy · solveset()</code></td>
+                                <td>Validación de datos, preprocesamiento</td>
+                            </tr>
+                            <tr>
+                                <td>Evaluación f(x₀)</td>
+                                <td><code>.subs() · .evalf()</code></td>
+                                <td>Inferencia puntual</td>
+                            </tr>
+                            <tr>
+                                <td>Evaluación masiva sobre dominio</td>
+                                <td><code>lambdify + NumPy</code></td>
+                                <td>Predicción sobre datasets completos</td>
+                            </tr>
+                            <tr>
+                                <td>Gráfica de función</td>
+                                <td><code>Matplotlib · ax.plot()</code></td>
+                                <td>EDA, curvas de pérdida, fronteras</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: def, lambda, type hints -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Definir funciones en Python</h2>
+                <p class="slide-subtitle">def, lambda y funciones como objetos de primera clase</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="comment"># === def — función con nombre ===</span>
+<span class="keyword">def</span> <span class="func">f</span>(x: <span class="func">float</span>) -> <span class="func">float</span>:
+    <span class="string">"""f(x) = x² - 3x + 2"""</span>
+    <span class="keyword">return</span> x**<span class="number">2</span> - <span class="number">3</span>*x + <span class="number">2</span>
+
+<span class="comment"># Type hints documentan dominio y codominio:</span>
+<span class="comment"># f: float → float  ≡  f: ℝ → ℝ</span>
+
+<span class="comment"># Evaluar en puntos específicos</span>
+<span class="keyword">print</span>(f(<span class="number">0</span>))   <span class="comment"># => 2</span>
+<span class="keyword">print</span>(f(<span class="number">1</span>))   <span class="comment"># => 0  (raíz)</span>
+<span class="keyword">print</span>(f(<span class="number">2</span>))   <span class="comment"># => 0  (raíz)</span>
+
+<span class="comment"># === lambda — función anónima ===</span>
+cuadrado  = <span class="keyword">lambda</span> x: x**<span class="number">2</span>
+identidad = <span class="keyword">lambda</span> x: x
+reciproco = <span class="keyword">lambda</span> x: <span class="number">1</span>/x   <span class="comment"># dominio: x ≠ 0</span>
+
+<span class="comment"># === Funciones como objetos de primera clase ===</span>
+<span class="comment"># Se pueden guardar en listas, pasar como argumentos</span>
+familias = [
+    <span class="keyword">lambda</span> x: x,       <span class="comment"># lineal</span>
+    <span class="keyword">lambda</span> x: x**<span class="number">2</span>,    <span class="comment"># cuadrática</span>
+    <span class="keyword">lambda</span> x: x**<span class="number">3</span>,    <span class="comment"># cúbica</span>
+    <span class="keyword">lambda</span> x: <span class="number">2</span>**x,    <span class="comment"># exponencial</span>
+]
+nombres = [<span class="string">'Lineal'</span>, <span class="string">'Cuadrática'</span>, <span class="string">'Cúbica'</span>, <span class="string">'Exponencial'</span>]
+
+<span class="keyword">for</span> nombre, func <span class="keyword">in</span> <span class="func">zip</span>(nombres, familias):
+    <span class="keyword">print</span>(<span class="string">f"</span>{nombre}: f(2) = {func(<span class="number">2</span>)}<span class="string">"</span>)
+                    </div>
+                    <div>
+                        <div class="key-point">
+                            <h4>def vs lambda</h4>
+                            <p><code>def</code> crea funciones con nombre, docstring y lógica compleja. <code>lambda</code> crea funciones anónimas de una sola expresión. Para ciencia de datos, <code>def</code> siempre es preferible en código de producción.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Type hints</h4>
+                            <p><code>x: float</code> y <code>-> float</code> documentan formalmente el dominio y codominio de la función. En Python 3.14, estas anotaciones se evalúan de forma diferida (más eficiente).</p>
+                        </div>
+                        <div class="output-box">
+Lineal:      f(2) = 2
+Cuadrática:  f(2) = 4
+Cúbica:      f(2) = 8
+Exponencial: f(2) = 4
+                        </div>
+                        <div class="highlight-box">
+                            <p>Pasar funciones como argumentos a otras funciones es fundamental en DS: map(), filter(), y los pipelines de sklearn funcionan exactamente así.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Composición de funciones -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Composición de funciones</h2>
+                <p class="slide-subtitle">(f ∘ g)(x) = f(g(x)) — el corazón de los pipelines</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div>
+                        <div class="formula-box" style="margin-bottom: 15px; font-size: 20px;">
+                            (f ∘ g)(x) = f(g(x))
+                        </div>
+                        <div class="code-box">
+<span class="comment"># Componer funciones: HOF (higher-order function)</span>
+<span class="keyword">def</span> <span class="func">componer</span>(f, g):
+    <span class="string">"""Retorna la composición f ∘ g."""</span>
+    <span class="keyword">return lambda</span> x: f(g(x))
+
+f = <span class="keyword">lambda</span> x: x**<span class="number">2</span>     <span class="comment"># f(x) = x²</span>
+g = <span class="keyword">lambda</span> x: x + <span class="number">1</span>   <span class="comment"># g(x) = x + 1</span>
+
+fog = componer(f, g)   <span class="comment"># (f∘g)(x) = (x+1)²</span>
+gof = componer(g, f)   <span class="comment"># (g∘f)(x) = x² + 1</span>
+
+<span class="keyword">print</span>(<span class="string">f"(f∘g)(3) = {fog(3)}"</span>)  <span class="comment"># => 16</span>
+<span class="keyword">print</span>(<span class="string">f"(g∘f)(3) = {gof(3)}"</span>)  <span class="comment"># => 10</span>
+<span class="comment"># La composición NO es conmutativa</span>
+
+<span class="comment"># ===================================</span>
+<span class="comment"># Pipeline = composición en scikit-learn</span>
+<span class="comment"># ===================================</span>
+<span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline
+<span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> (
+    StandardScaler, FunctionTransformer
+)
+<span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># Pipeline = g(f₂(f₁(X)))</span>
+pipeline = Pipeline([
+    (<span class="string">'log'</span>, FunctionTransformer(np.log1p)),  <span class="comment"># f₁</span>
+    (<span class="string">'scaler'</span>, StandardScaler()),           <span class="comment"># f₂</span>
+    (<span class="string">'modelo'</span>, LogisticRegression())         <span class="comment"># g</span>
+])
+<span class="comment"># pipeline.predict(X) computa g(f₂(f₁(X)))</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="key-point">
+                            <h4>Orden importa</h4>
+                            <p>f ∘ g ≠ g ∘ f en general. (f∘g)(3) = f(g(3)) = f(4) = 16, mientras (g∘f)(3) = g(9) = 10. Esta asimetría tiene consecuencias directas en pipelines de ML.</p>
+                        </div>
+                        <div class="content-box" style="margin-top: 12px;">
+                            <h3>Pipeline como composición matemática</h3>
+                            <ul>
+                                <li>log1p(x) transforma el dominio para normalizar distribuciones sesgadas</li>
+                                <li>StandardScaler centra y escala: f(x) = (x-μ)/σ</li>
+                                <li>LogisticRegression aplica la función final de clasificación</li>
+                                <li>El orden es estricto: primero transformar, luego modelar</li>
+                            </ul>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Un pipeline de ML es formalmente una composición de funciones: predicción = modelo(escalar(log(datos))). La matemática detrás es exactamente f ∘ g ∘ h.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: SymPy subs y evalf -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">SymPy 1.14: subs() y evalf()</h2>
+                <p class="slide-subtitle">Evaluación simbólica exacta con precisión arbitraria</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">from</span> sympy <span class="keyword">import</span> symbols, sin, cos, pi, sqrt
+<span class="keyword">from</span> sympy <span class="keyword">import</span> factor, simplify
+
+x = symbols(<span class="string">'x'</span>)
+f = x**<span class="number">2</span> - <span class="number">3</span>*x + <span class="number">2</span>
+
+<span class="comment"># === subs() — sustitución simbólica ===</span>
+<span class="comment"># Retorna resultado EXACTO (no decimal)</span>
+<span class="keyword">print</span>(f.subs(x, <span class="number">3</span>))        <span class="comment"># => 2  (exacto)</span>
+<span class="keyword">print</span>(f.subs(x, <span class="number">1</span>))        <span class="comment"># => 0  (raíz exacta)</span>
+
+<span class="comment"># Sustitución simbólica: reemplazar x por otra expr</span>
+a = symbols(<span class="string">'a'</span>)
+<span class="keyword">print</span>(f.subs(x, a + <span class="number">1</span>))    <span class="comment"># => a² - a  (expresión simbólica)</span>
+
+<span class="comment"># Sustituciones múltiples simultáneas</span>
+b = symbols(<span class="string">'b'</span>)
+expr_2d = a**<span class="number">2</span> + b**<span class="number">2</span>
+<span class="keyword">print</span>(expr_2d.subs([(a, <span class="number">3</span>), (b, <span class="number">4</span>)]))  <span class="comment"># => 25</span>
+
+<span class="comment"># SymPy también factoriza automáticamente</span>
+<span class="keyword">print</span>(factor(f))   <span class="comment"># => (x - 1)*(x - 2)</span>
+
+<span class="comment"># === evalf() — valor numérico de alta precisión ===</span>
+<span class="keyword">print</span>(sqrt(<span class="number">2</span>).evalf())     <span class="comment"># => 1.41421356237310</span>
+<span class="keyword">print</span>(sqrt(<span class="number">2</span>).evalf(<span class="number">50</span>))  <span class="comment"># 50 dígitos de precisión</span>
+<span class="keyword">print</span>(sin(pi/<span class="number">6</span>).evalf())  <span class="comment"># => 0.500000000000000 (exacto!)</span>
+<span class="keyword">print</span>(pi.evalf(<span class="number">30</span>))        <span class="comment"># 30 dígitos de pi</span>
+
+<span class="comment"># Verificar identidad trigonométrica</span>
+identidad = sin(x)**<span class="number">2</span> + cos(x)**<span class="number">2</span>
+<span class="keyword">print</span>(simplify(identidad))  <span class="comment"># => 1</span>
+                    </div>
+                    <div>
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Método</th>
+                                        <th>Qué hace</th>
+                                        <th>Retorna</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>.subs(x, val)</code></td>
+                                        <td>Sustituye x por un valor o expresión</td>
+                                        <td>Expresión simbólica exacta</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>.subs([(a,v1),(b,v2)])</code></td>
+                                        <td>Múltiples sustituciones a la vez</td>
+                                        <td>Expresión simbólica exacta</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>.evalf()</code></td>
+                                        <td>Convierte a decimal (15 dígitos)</td>
+                                        <td>Float de alta precisión</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>.evalf(n)</code></td>
+                                        <td>Decimal con n dígitos de precisión</td>
+                                        <td>Float de precisión arbitraria</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="highlight-box" style="margin-top: 15px;">
+                            <p>subs() es inmutable — nunca modifica la expresión original. Siempre retorna una nueva expresión. Esto corresponde exactamente a la evaluación matemática f(x₀).</p>
+                        </div>
+                        <div class="key-point">
+                            <h4>Cuándo usar subs vs evalf</h4>
+                            <p>Usar subs() para verificación exacta y manipulación algebraica. Usar evalf() cuando se necesita un número decimal para graficar o comparar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: lambdify -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">lambdify(): el puente simbólico-numérico</h2>
+                <p class="slide-subtitle">Convertir expresiones SymPy en funciones NumPy de alta velocidad</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">from</span> sympy <span class="keyword">import</span> symbols, sin, cos, Piecewise, lambdify
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+x = symbols(<span class="string">'x'</span>)
+expr = x**<span class="number">2</span> - <span class="number">3</span>*x + <span class="number">2</span>
+
+<span class="comment"># === lambdify — convierte a función Python/NumPy ===</span>
+<span class="comment"># SIEMPRE especificar modules='numpy'</span>
+f_num = lambdify(x, expr, modules=<span class="string">'numpy'</span>)
+
+<span class="comment"># Ahora f_num acepta arrays NumPy enteros</span>
+x_array = np.linspace(-<span class="number">2</span>, <span class="number">5</span>, <span class="number">1000</span>)
+y_array = f_num(x_array)  <span class="comment"># 1000 evaluaciones en nanosegundos</span>
+
+<span class="comment"># Funciones con trigonometría</span>
+g_expr = sin(x)**<span class="number">2</span> + x
+g_num = lambdify(x, g_expr, modules=<span class="string">'numpy'</span>)
+<span class="keyword">print</span>(<span class="string">f"g(π) = {g_num(np.pi):.6f}"</span>)   <span class="comment"># => 3.141593</span>
+
+<span class="comment"># lambdify con Piecewise (función a trozos)</span>
+pw_expr = Piecewise(
+    (x**<span class="number">2</span>, x < <span class="number">0</span>),    <span class="comment"># tramo 1: x²</span>
+    (x + <span class="number">1</span>, <span class="keyword">True</span>)      <span class="comment"># tramo 2: x+1</span>
+)
+pw_num = lambdify(x, pw_expr, modules=<span class="string">'numpy'</span>)
+<span class="keyword">print</span>(pw_num(-<span class="number">2</span>))   <span class="comment"># => 4.0  (tramo x²)</span>
+<span class="keyword">print</span>(pw_num(<span class="number">3</span>))    <span class="comment"># => 4.0  (tramo x+1)</span>
+
+<span class="comment"># ⚠ TRAMPA COMÚN: np.vectorize NO es vectorización real</span>
+<span class="comment"># Es un bucle for disfrazado — lambdify es 100x más rápido</span>
+                    </div>
+                    <div>
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Método</th>
+                                        <th>Velocidad</th>
+                                        <th>Caso ideal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>subs() + evalf()</code></td>
+                                        <td>~10⁴ eval/seg</td>
+                                        <td>Verificación exacta, prototipado</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>lambdify + math</code></td>
+                                        <td>~10⁶ eval/seg</td>
+                                        <td>Evaluación escalar rápida</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>lambdify + numpy</code></td>
+                                        <td>~10⁸ elem/seg</td>
+                                        <td>Datasets completos, graficación</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 15px;">
+                            <div class="step-row">
+                                <div class="step-number">1</div>
+                                <div class="step-text">
+                                    <h5>Definir simbólicamente con SymPy</h5>
+                                    <p>Verificar, simplificar, factorizar, derivar</p>
+                                </div>
+                            </div>
+                            <div class="arrow-connector">↓</div>
+                            <div class="step-row">
+                                <div class="step-number">2</div>
+                                <div class="step-text">
+                                    <h5>Convertir con lambdify(modules='numpy')</h5>
+                                    <p>El puente entre el mundo simbólico y numérico</p>
+                                </div>
+                            </div>
+                            <div class="arrow-connector">↓</div>
+                            <div class="step-row">
+                                <div class="step-number">3</div>
+                                <div class="step-text">
+                                    <h5>Evaluar con NumPy + graficar con Matplotlib</h5>
+                                    <p>Miles de puntos en milisegundos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: NumPy vectorización -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">NumPy 2.4: evaluación vectorizada</h2>
+                <p class="slide-subtitle">Dominio y rango como arrays — sin bucles, sin excusas</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># === Generar dominio ===</span>
+x = np.linspace(-<span class="number">5</span>, <span class="number">5</span>, <span class="number">1000</span>)   <span class="comment"># 1000 puntos uniformes</span>
+x_pos = np.linspace(<span class="number">0.01</span>, <span class="number">5</span>, <span class="number">500</span>) <span class="comment"># solo positivos (para log)</span>
+
+<span class="comment"># === Ufuncs: operan elemento a elemento ===</span>
+y_sin = np.sin(x)              <span class="comment"># sin(x)</span>
+y_exp = np.exp(x)              <span class="comment"># eˣ</span>
+y_log = np.log(x_pos)          <span class="comment"># ln(x), dominio > 0</span>
+y_log1p = np.log1p(np.abs(x))  <span class="comment"># log(1+|x|), maneja ceros</span>
+
+<span class="comment"># === Funciones a trozos con np.piecewise ===</span>
+<span class="comment"># ReLU: f(x) = max(0, x)</span>
+y_relu = np.piecewise(x,
+    [x < <span class="number">0</span>, x >= <span class="number">0</span>],
+    [<span class="number">0</span>, <span class="keyword">lambda</span> v: v]
+)
+
+<span class="comment"># Equivalente más compacto:</span>
+y_relu2 = np.maximum(<span class="number">0</span>, x)
+
+<span class="comment"># === Verificar restricciones de dominio ===</span>
+<span class="comment"># Qué pasa si ignoramos el dominio de log</span>
+x_test = np.array([<span class="number">2</span>, <span class="number">0</span>, -<span class="number">3</span>])
+<span class="keyword">with</span> np.errstate(divide=<span class="string">'ignore'</span>, invalid=<span class="string">'ignore'</span>):
+    resultado = np.log(x_test)
+    <span class="keyword">print</span>(resultado)
+<span class="comment"># => [0.693..., -inf, nan]</span>
+<span class="comment"># -inf y nan son errores de dominio en datos reales</span>
+
+<span class="comment"># Solución correcta: log1p o clip</span>
+seguro = np.log1p(np.clip(x_test, <span class="number">0</span>, <span class="keyword">None</span>))
+<span class="keyword">print</span>(seguro)  <span class="comment"># => [1.098..., 0.0, 0.0]</span>
+                    </div>
+                    <div>
+                        <div class="key-point">
+                            <h4>linspace — el dominio discreto</h4>
+                            <p><code>np.linspace(a, b, n)</code> genera n puntos igualmente espaciados en [a, b]. Es la representación computacional del dominio continuo de una función.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Ufuncs — evaluación masiva</h4>
+                            <p>Las funciones universales de NumPy (sin, exp, log...) están implementadas en C y operan sobre arrays completos. No usar bucles <code>for</code> para esto.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Errores de dominio en producción</h4>
+                            <p>log(0) = -∞ y log(x<0) = NaN son errores reales que aparecen en datasets. Siempre validar el dominio antes de aplicar transformaciones.</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Regla de oro: si se necesita aplicar una operación matemática a más de un valor, usar NumPy vectorizado. Nunca iterar con un bucle for en Python.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Flujo completo -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Flujo completo: de la definición a la gráfica</h2>
+                <p class="slide-subtitle">SymPy → lambdify → NumPy → Matplotlib en acción</p>
+            </div>
+            <div class="slide-content">
+                <div class="code-box">
+<span class="keyword">from</span> sympy <span class="keyword">import</span> symbols, sin, cos, lambdify, simplify, factor
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+x = symbols(<span class="string">'x'</span>)
+
+<span class="comment"># ── PASO 1: Definir simbólicamente ───────────────────────────</span>
+f_sym = x**<span class="number">2</span> - <span class="number">3</span>*x + <span class="number">2</span>
+<span class="keyword">print</span>(<span class="string">"Expresión:"</span>, f_sym)
+<span class="keyword">print</span>(<span class="string">"Factorizada:"</span>, factor(f_sym))    <span class="comment"># => (x-1)*(x-2)</span>
+<span class="keyword">print</span>(<span class="string">"f(0) ="</span>, f_sym.subs(x, <span class="number">0</span>))       <span class="comment"># => 2</span>
+<span class="keyword">print</span>(<span class="string">"f(1) ="</span>, f_sym.subs(x, <span class="number">1</span>))       <span class="comment"># => 0 (raíz)</span>
+
+<span class="comment"># ── PASO 2: Convertir a función numérica ─────────────────────</span>
+f_num = lambdify(x, f_sym, modules=<span class="string">'numpy'</span>)
+
+<span class="comment"># ── PASO 3: Evaluar sobre el dominio ─────────────────────────</span>
+x_vals = np.linspace(-<span class="number">1</span>, <span class="number">4</span>, <span class="number">500</span>)   <span class="comment"># dominio</span>
+y_vals = f_num(x_vals)              <span class="comment"># rango</span>
+
+<span class="comment"># ── PASO 4: Graficar ─────────────────────────────────────────</span>
+fig, ax = plt.subplots(figsize=(<span class="number">9</span>, <span class="number">5</span>), layout=<span class="string">'constrained'</span>)
+
+ax.plot(x_vals, y_vals, color=<span class="string">'#FF8C00'</span>, linewidth=<span class="number">2.5</span>,
+        label=<span class="string">r'$f(x) = x^2 - 3x + 2$'</span>)
+
+<span class="comment"># Marcar raíces (dominio donde f(x) = 0)</span>
+ax.scatter([<span class="number">1</span>, <span class="number">2</span>], [<span class="number">0</span>, <span class="number">0</span>], color=<span class="string">'red'</span>, s=<span class="number">80</span>, zorder=<span class="number">5</span>,
+           label=<span class="string">'Raíces: x=1, x=2'</span>)
+ax.scatter([<span class="number">0</span>], [<span class="number">2</span>], color=<span class="string">'steelblue'</span>, s=<span class="number">80</span>, zorder=<span class="number">5</span>,
+           label=<span class="string">'Intercepto y: (0, 2)'</span>)
+
+ax.axhline(<span class="number">0</span>, color=<span class="string">'black'</span>, linewidth=<span class="number">0.8</span>)
+ax.axvline(<span class="number">0</span>, color=<span class="string">'black'</span>, linewidth=<span class="number">0.8</span>)
+ax.set_xlabel(<span class="string">'x (dominio)'</span>, fontsize=<span class="number">12</span>)
+ax.set_ylabel(<span class="string">'f(x) (rango)'</span>, fontsize=<span class="number">12</span>)
+ax.set_title(<span class="string">'Flujo completo: SymPy → lambdify → NumPy → Matplotlib'</span>, fontsize=<span class="number">13</span>)
+ax.legend(); ax.grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+plt.show()
+                </div>
+                <div class="highlight-box" style="margin-top: 12px;">
+                    <p>Este es el flujo estándar del curso: SymPy para entender y verificar, lambdify como puente, NumPy para evaluar masivamente, Matplotlib para comunicar. Cada herramienta tiene su rol.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Ejemplo Costa Rica -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Aplicación CR: tipo de cambio como función</h2>
+                <p class="slide-subtitle">f(t) = tipo de cambio BCCR — dominio, rango y tendencia</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">from</span> sympy <span class="keyword">import</span> symbols, sin, lambdify
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+<span class="comment"># Datos reales BCCR: TC mensual CRC/USD (2024-2026)</span>
+meses = [<span class="string">'Ene24'</span>,<span class="string">'Abr24'</span>,<span class="string">'Jul24'</span>,<span class="string">'Oct24'</span>,
+         <span class="string">'Ene25'</span>,<span class="string">'Abr25'</span>,<span class="string">'Jul25'</span>,<span class="string">'Oct25'</span>,
+         <span class="string">'Ene26'</span>,<span class="string">'Feb26'</span>]
+tc_obs = [<span class="number">518</span>, <span class="number">510</span>, <span class="number">515</span>, <span class="number">508</span>, <span class="number">500</span>,
+          <span class="number">495</span>, <span class="number">488</span>, <span class="number">480</span>, <span class="number">476</span>, <span class="number">472</span>]
+t_obs = np.arange(<span class="func">len</span>(meses))
+
+<span class="comment"># ── Modelo simbólico con SymPy ────────────────────────────</span>
+t = symbols(<span class="string">'t'</span>)
+<span class="comment"># TC(t) = tendencia decreciente + oscilación estacional</span>
+tc_modelo = <span class="number">520</span> - <span class="number">4</span>*t + <span class="number">3</span>*sin(<span class="number">2</span>*<span class="number">3.14159</span>*t/<span class="number">12</span>)
+
+tc_num = lambdify(t, tc_modelo, modules=<span class="string">'numpy'</span>)
+
+<span class="comment"># ── Evaluación y gráfica ──────────────────────────────────</span>
+t_smooth = np.linspace(<span class="number">0</span>, <span class="number">9</span>, <span class="number">200</span>)  <span class="comment"># dominio continuo</span>
+tc_smooth = tc_num(t_smooth)         <span class="comment"># rango del modelo</span>
+
+fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), layout=<span class="string">'constrained'</span>)
+
+ax.scatter(t_obs, tc_obs, c=<span class="string">'#2d2d2d'</span>, s=<span class="number">80</span>, zorder=<span class="number">5</span>,
+           label=<span class="string">'Datos reales BCCR'</span>)
+ax.plot(t_smooth, tc_smooth, color=<span class="string">'#FF8C00'</span>, lw=<span class="number">2</span>,
+        label=<span class="string">r'Modelo: $TC(t) = 520 - 4t + 3\sin(2\pi t/12)$'</span>)
+ax.axhline(<span class="number">500</span>, ls=<span class="string">'--'</span>, color=<span class="string">'red'</span>, alpha=<span class="number">0.5</span>,
+           label=<span class="string">'Referencia ₡500'</span>)
+
+ax.set_xticks(t_obs); ax.set_xticklabels(meses, rotation=<span class="number">45</span>)
+ax.set_ylabel(<span class="string">'CRC/USD'</span>); ax.legend(); ax.grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+ax.set_title(<span class="string">'Tipo de cambio BCCR como función f(t) — dominio: días hábiles'</span>)
+plt.show()
+                    </div>
+                    <div>
+                        <div class="key-point">
+                            <h4>Propiedades de esta función</h4>
+                            <p>f(t) = tipo de cambio es monótonamente decreciente en 2024–2026 (apreciación del colón). Dominio: días hábiles — los fines de semana y feriados no tienen valor de referencia.</p>
+                        </div>
+                        <div class="content-box" style="margin-top: 12px;">
+                            <h3>Datos reales (BCCR, febrero 2026)</h3>
+                            <ul>
+                                <li>Tasa de política monetaria: 3.25%</li>
+                                <li>TC referencia compra Feb-2026: ~₡472 USD</li>
+                                <li>Apreciación colón 2024-2026: ~8-9%</li>
+                                <li>Rango del periodo: [472, 518] CRC/USD</li>
+                            </ul>
+                        </div>
+                        <div class="highlight-box">
+                            <p>El modelo combina una función lineal decreciente (tendencia) con una función sinusoidal (componente estacional). Es la composición de dos funciones elementales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Dominio y rango en preprocessing -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Dominio y rango en preprocessing</h2>
+                <p class="slide-subtitle">Las restricciones matemáticas tienen consecuencias reales en ML</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># === MinMaxScaler como función lineal biyectiva ===</span>
+<span class="comment"># f: [x_min, x_max] → [0, 1]</span>
+<span class="keyword">def</span> <span class="func">min_max_scale</span>(x: np.ndarray) -> np.ndarray:
+    x_min, x_max = x.min(), x.max()
+    <span class="keyword">return</span> (x - x_min) / (x_max - x_min)
+
+<span class="comment"># Función inversa (recuperar valores originales)</span>
+<span class="keyword">def</span> <span class="func">min_max_inverse</span>(y, x_min, x_max) -> np.ndarray:
+    <span class="keyword">return</span> y * (x_max - x_min) + x_min
+
+turistas = np.array([<span class="number">270</span>, <span class="number">245</span>, <span class="number">198</span>, <span class="number">140</span>, <span class="number">110</span>,
+                     <span class="number">104</span>, <span class="number">122</span>, <span class="number">175</span>, <span class="number">278</span>]) * <span class="number">1000</span>
+norm = min_max_scale(turistas.astype(float))
+<span class="keyword">print</span>(<span class="string">f"Mínimo normalizado: {norm.min():.1f}"</span>)  <span class="comment"># => 0.0</span>
+<span class="keyword">print</span>(<span class="string">f"Máximo normalizado: {norm.max():.1f}"</span>)  <span class="comment"># => 1.0</span>
+
+<span class="comment"># === log1p: dominio x > -1 ===</span>
+<span class="comment"># Maneja ceros (problema del log estándar)</span>
+ingresos = np.array([<span class="number">0</span>, <span class="number">500</span>, <span class="number">1200</span>, <span class="number">15000</span>, <span class="number">0</span>, <span class="number">230</span>])
+<span class="keyword">print</span>(np.log1p(ingresos))   <span class="comment"># sin error en 0</span>
+<span class="comment">#  log(0 + 1) = 0, no -inf</span>
+
+<span class="comment"># === StandardScaler como función lineal ===</span>
+<span class="comment"># z = (x - μ) / σ  →  f: ℝ → ℝ, biyectiva para σ > 0</span>
+def <span class="func">standard_scale</span>(x):
+    <span class="keyword">return</span> (x - x.mean()) / x.std()
+
+z = standard_scale(turistas.astype(float))
+<span class="keyword">print</span>(<span class="string">f"Media centrada: {z.mean():.10f}"</span>)  <span class="comment"># ≈ 0</span>
+<span class="keyword">print</span>(<span class="string">f"Desv. estándar: {z.std():.6f}"</span>)   <span class="comment"># ≈ 1</span>
+                    </div>
+                    <div>
+                        <div class="three-columns" style="margin-bottom: 12px;">
+                            <div class="ml-card">
+                                <div class="badge">MinMax</div>
+                                <h4>f: [xₘᵢₙ, xₘₐₓ] → [0,1]</h4>
+                                <p>Biyectiva. Rango exactamente [0,1]. Inversa existe siempre que xₘₐₓ ≠ xₘᵢₙ.</p>
+                            </div>
+                            <div class="ml-card">
+                                <div class="badge">log1p</div>
+                                <h4>f: (-1,∞) → ℝ</h4>
+                                <p>Dom extendido al incluir x=0. Maneja datos con ceros sin producir -∞.</p>
+                            </div>
+                            <div class="ml-card">
+                                <div class="badge">StandardScaler</div>
+                                <h4>f: ℝ → ℝ</h4>
+                                <p>Biyectiva. Centra μ=0 y σ=1. Inversa: x = z·σ + μ.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Transformación</th>
+                                        <th>Dominio</th>
+                                        <th>Rango</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>MinMaxScaler</td>
+                                        <td>[xₘᵢₙ, xₘₐₓ]</td>
+                                        <td>[0, 1]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>StandardScaler</td>
+                                        <td>ℝ</td>
+                                        <td>ℝ (μ=0, σ=1)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>log(x)</td>
+                                        <td>(0, ∞)</td>
+                                        <td>ℝ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>log1p(x)</td>
+                                        <td>(-1, ∞)</td>
+                                        <td>ℝ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sigmoid</td>
+                                        <td>ℝ</td>
+                                        <td>(0, 1)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Funciones de activación -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Funciones de activación: propiedades en acción</h2>
+                <p class="slide-subtitle">Inyectividad, monotonía y acotamiento determinan el comportamiento de redes neuronales</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+x = np.linspace(-<span class="number">4</span>, <span class="number">4</span>, <span class="number">500</span>)
+
+<span class="comment"># === Las 4 funciones de activación más usadas ===</span>
+
+<span class="comment"># ReLU: f(x) = max(0, x)</span>
+<span class="comment"># NO inyectiva (todos los negativos → 0)</span>
+<span class="comment"># Dominio: ℝ | Rango: [0, ∞)</span>
+relu = np.maximum(<span class="number">0</span>, x)
+
+<span class="comment"># Sigmoid: σ(x) = 1 / (1 + e^-x)</span>
+<span class="comment"># Biyectiva sobre (0,1), estrictamente creciente</span>
+<span class="comment"># Dominio: ℝ | Rango: (0, 1)</span>
+sigmoid = <span class="number">1</span> / (<span class="number">1</span> + np.exp(-x))
+
+<span class="comment"># Tanh: función IMPAR (tanh(-x) = -tanh(x))</span>
+<span class="comment"># Biyectiva sobre (-1, 1), centrada en 0</span>
+<span class="comment"># Dominio: ℝ | Rango: (-1, 1)</span>
+tanh = np.tanh(x)
+
+<span class="comment"># GELU: x * Φ(x), donde Φ es la CDF gaussiana</span>
+<span class="comment"># NO monótona (pequeño valle en x ≈ -0.17)</span>
+<span class="comment"># Usada en GPT-2, GPT-3, BERT</span>
+<span class="keyword">from</span> scipy.special <span class="keyword">import</span> erf
+gelu = x * <span class="number">0.5</span> * (<span class="number">1</span> + erf(x / np.sqrt(<span class="number">2</span>)))
+
+fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), layout=<span class="string">'constrained'</span>)
+ax.plot(x, relu,    label=<span class="string">'ReLU   |  [0,∞)'</span>, lw=<span class="number">2</span>)
+ax.plot(x, sigmoid, label=<span class="string">'Sigmoid | (0,1)'</span>,  lw=<span class="number">2</span>)
+ax.plot(x, tanh,    label=<span class="string">'Tanh   | (-1,1) — función impar'</span>, lw=<span class="number">2</span>)
+ax.plot(x, gelu,    label=<span class="string">'GELU   | no monótona'</span>, lw=<span class="number">2</span>, ls=<span class="string">'--'</span>)
+ax.axhline(<span class="number">0</span>, color=<span class="string">'black'</span>, lw=<span class="number">0.8</span>)
+ax.axvline(<span class="number">0</span>, color=<span class="string">'black'</span>, lw=<span class="number">0.8</span>)
+ax.legend(fontsize=<span class="number">11</span>); ax.grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+ax.set_title(<span class="string">'Funciones de activación: propiedades matemáticas vs. ML'</span>)
+plt.show()
+                    </div>
+                    <div>
+                        <div class="ml-card" style="margin-bottom: 10px;">
+                            <div class="badge">ReLU</div>
+                            <h4>f(x) = max(0, x)</h4>
+                            <p>No inyectiva → "neuronas muertas" (dead neurons). Todos los negativos → 0. Rango [0, ∞), no acotada superiormente.</p>
+                        </div>
+                        <div class="ml-card" style="margin-bottom: 10px;">
+                            <div class="badge">Sigmoid</div>
+                            <h4>σ(x) = 1/(1 + e⁻ˣ)</h4>
+                            <p>Biyectiva sobre (0,1). Acotada → gradiente que desvanece (vanishing gradient) para |x| grande.</p>
+                        </div>
+                        <div class="ml-card" style="margin-bottom: 10px;">
+                            <div class="badge">Tanh</div>
+                            <h4>f(x) = (eˣ - e⁻ˣ)/(eˣ + e⁻ˣ)</h4>
+                            <p>Función impar: tanh(-x) = -tanh(x). Centrada en 0. Relacionada con sigmoid: tanh(x) = 2σ(2x) - 1.</p>
+                        </div>
+                        <div class="ml-card">
+                            <div class="badge">GELU</div>
+                            <h4>f(x) = x · Φ(x)</h4>
+                            <p>No monótona. Suave y diferenciable. Usada en GPT-2, GPT-3, BERT. La no monotonía está relacionada con mejor representación de datos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Gráfica de familias -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Gráfica de familias de funciones</h2>
+                <p class="slide-subtitle">Visualizar dominio, rango y propiedades con Matplotlib 3.10</p>
+            </div>
+            <div class="slide-content">
+                <div class="code-box">
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+x = np.linspace(-<span class="number">3</span>, <span class="number">3</span>, <span class="number">500</span>)
+x_pos = np.linspace(<span class="number">0.01</span>, <span class="number">3</span>, <span class="number">400</span>)
+
+fig, axs = plt.subplots(<span class="number">2</span>, <span class="number">2</span>, figsize=(<span class="number">11</span>, <span class="number">7</span>), layout=<span class="string">'constrained'</span>)
+
+<span class="comment"># Panel 1: Polinomios — par vs impar</span>
+axs[<span class="number">0</span>, <span class="number">0</span>].plot(x, x**<span class="number">2</span>, label=<span class="string">r'$x^2$ — PAR (dom:ℝ, ran:[0,∞))'</span>, lw=<span class="number">2</span>)
+axs[<span class="number">0</span>, <span class="number">0</span>].plot(x, x**<span class="number">3</span>, label=<span class="string">r'$x^3$ — IMPAR (dom:ℝ, ran:ℝ)'</span>, lw=<span class="number">2</span>)
+axs[<span class="number">0</span>, <span class="number">0</span>].set_title(<span class="string">'Polinomios: par vs impar'</span>); axs[<span class="number">0</span>,<span class="number">0</span>].legend()
+
+<span class="comment"># Panel 2: Exponencial — rango siempre (0,∞)</span>
+axs[<span class="number">0</span>, <span class="number">1</span>].plot(x, np.exp(x), label=<span class="string">r'$e^x$ — dom:ℝ, ran:(0,∞)'</span>, lw=<span class="number">2</span>)
+axs[<span class="number">0</span>, <span class="number">1</span>].plot(x, <span class="number">2</span>**x, label=<span class="string">r'$2^x$ — dom:ℝ, ran:(0,∞)'</span>, lw=<span class="number">2</span>, ls=<span class="string">'--'</span>)
+axs[<span class="number">0</span>, <span class="number">1</span>].set_title(<span class="string">'Exponenciales: rango siempre positivo'</span>); axs[<span class="number">0</span>,<span class="number">1</span>].legend()
+axs[<span class="number">0</span>, <span class="number">1</span>].set_ylim(<span class="number">0</span>, <span class="number">10</span>)
+
+<span class="comment"># Panel 3: Logarítmicas — dominio restringido</span>
+axs[<span class="number">1</span>, <span class="number">0</span>].plot(x_pos, np.log(x_pos), label=<span class="string">r'$\ln(x)$ — dom:(0,∞), ran:ℝ'</span>, lw=<span class="number">2</span>)
+axs[<span class="number">1</span>, <span class="number">0</span>].plot(x_pos, np.log1p(x_pos), label=<span class="string">r'$\log(1+x)$ — dom:(-1,∞)'</span>, lw=<span class="number">2</span>, ls=<span class="string">'--'</span>)
+axs[<span class="number">1</span>, <span class="number">0</span>].set_title(<span class="string">'Logarítmicas: dominio restringido'</span>); axs[<span class="number">1</span>,<span class="number">0</span>].legend()
+
+<span class="comment"># Panel 4: Transformaciones de x² (vértice, desplazamiento)</span>
+axs[<span class="number">1</span>, <span class="number">1</span>].plot(x, x**<span class="number">2</span>,          label=<span class="string">r'$f(x)=x^2$'</span>, lw=<span class="number">2</span>)
+axs[<span class="number">1</span>, <span class="number">1</span>].plot(x, (x-<span class="number">1</span>)**<span class="number">2</span> + <span class="number">2</span>, label=<span class="string">r'$g(x)=(x-1)^2+2$'</span>, lw=<span class="number">2</span>)
+axs[<span class="number">1</span>, <span class="number">1</span>].plot(x, <span class="number">2</span>*(x+<span class="number">1</span>)**<span class="number">2</span> - <span class="number">1</span>,label=<span class="string">r'$h(x)=2(x+1)^2-1$'</span>, lw=<span class="number">2</span>)
+axs[<span class="number">1</span>, <span class="number">1</span>].set_title(<span class="string">'Transformaciones: y = a(x-h)² + k'</span>); axs[<span class="number">1</span>,<span class="number">1</span>].legend()
+
+<span class="keyword">for</span> ax <span class="keyword">in</span> axs.flat:
+    ax.axhline(<span class="number">0</span>, color=<span class="string">'k'</span>, lw=<span class="number">0.5</span>); ax.axvline(<span class="number">0</span>, color=<span class="string">'k'</span>, lw=<span class="number">0.5</span>)
+    ax.grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+
+fig.suptitle(<span class="string">'Familias de funciones — Semana 7'</span>, fontsize=<span class="number">15</span>, fontweight=<span class="string">'bold'</span>)
+plt.show()
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Resumen -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Resumen de la semana 7</h2>
+                <p class="slide-subtitle">Del concepto matemático a la herramienta computacional</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div>
+                        <div class="key-point">
+                            <h4>Definir funciones</h4>
+                            <p><code>def f(x)</code> es la función matemática f: A → B. Los type hints documentan dominio y codominio. Las funciones puras garantizan reproducibilidad.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>subs() y evalf()</h4>
+                            <p>Para evaluación exacta y simbólica. subs() es inmutable y retorna expresiones SymPy. evalf() convierte a decimal de alta precisión. Ideales para verificación.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>lambdify + NumPy</h4>
+                            <p>El puente entre SymPy y evaluación masiva. Siempre especificar <code>modules='numpy'</code>. Permite evaluar miles de puntos en nanosegundos.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Dominio y rango en producción</h4>
+                            <p>Las restricciones matemáticas generan errores reales: log(0) = -∞, log(negativo) = NaN. Usar log1p, clip, o validar antes de transformar.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="content-box">
+                            <h3>Para el Taller 2</h3>
+                            <ul>
+                                <li>El taller se entrega esta semana (asignado en semana 6)</li>
+                                <li>Incluye gráficas con Matplotlib — aplicar lo de semana 6</li>
+                                <li>Usar el flujo completo: SymPy → lambdify → NumPy → Matplotlib</li>
+                                <li>Documentar el dominio y rango de cada función usada</li>
+                            </ul>
+                        </div>
+                        <div class="highlight-box" style="margin-top: 15px;">
+                            <p>Próxima semana: funciones lineales. Veremos pendiente, intercepto, construcción desde datos y la primera regresión lineal con NumPy.</p>
+                        </div>
+                        <div class="content-box" style="margin-top: 15px;">
+                            <h3>Avance 1 del proyecto — vence hoy</h3>
+                            <p style="color: #FF8C00; font-weight: 600; margin-top: 8px;">Propuesta de 3-5 páginas con tema, dataset identificado y metodología preliminar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end presentation-container -->
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            if (n >= totalSlides) currentSlide = totalSlides - 1;
+            else if (n < 0) currentSlide = 0;
+            else currentSlide = n;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('currentSlide').textContent = currentSlide + 1;
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft')  changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>
