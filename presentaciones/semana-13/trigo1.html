@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semana 13: Trigonometr&iacute;a anal&iacute;tica en Python</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #f5f5f7;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 80px 140px 80px;
+            background: #f5f5f7;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide-header {
+            margin-bottom: 40px;
+        }
+
+        .slide-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #2d2d2d;
+            margin-bottom: 12px;
+        }
+
+        .slide-subtitle {
+            font-size: 20px;
+            color: #6e6e73;
+            font-weight: 300;
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 280px);
+        }
+
+        .content-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #e5e5e7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .content-box h3 {
+            font-size: 24px;
+            color: #2d2d2d;
+            margin-bottom: 12px;
+        }
+
+        .content-box p {
+            font-size: 16px;
+            color: #1d1d1f;
+            line-height: 1.5;
+        }
+
+        .content-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-box li {
+            font-size: 16px;
+            color: #1d1d1f;
+            line-height: 1.6;
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .content-box li::before {
+            content: "\25B8";
+            position: absolute;
+            left: 0;
+            color: #FF8C00;
+            font-size: 20px;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff5e6, #ffffff);
+            border-left: 4px solid #FF8C00;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .highlight-box p {
+            font-size: 17px;
+            color: #2d2d2d;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .key-point {
+            background: #ffffff;
+            border-left: 4px solid #FF8C00;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e5e7;
+            border-left: 4px solid #FF8C00;
+        }
+
+        .key-point h4 {
+            color: #2d2d2d;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .key-point p {
+            color: #1d1d1f;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .comparison-table {
+            background: #ffffff;
+            border-radius: 15px;
+            overflow: visible;
+            border: 1px solid #e5e5e7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .comparison-table thead tr:first-child th:first-child {
+            border-top-left-radius: 15px;
+        }
+
+        .comparison-table thead tr:first-child th:last-child {
+            border-top-right-radius: 15px;
+        }
+
+        .comparison-table tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 15px;
+        }
+
+        .comparison-table tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 15px;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(90deg, #2d2d2d, #FF8C00);
+            color: #ffffff;
+            padding: 12px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            font-size: 14px;
+            color: #1d1d1f;
+            border-bottom: 1px solid #f5f5f7;
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .code-box {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            color: #d4d4d4;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            text-align: left;
+            overflow: visible;
+            height: auto;
+            min-height: fit-content;
+        }
+
+        .code-box .comment { color: #6a9955; }
+        .code-box .keyword { color: #569cd6; }
+        .code-box .string  { color: #ce9178; }
+        .code-box .number  { color: #b5cea8; }
+        .code-box .func    { color: #dcdcaa; }
+        .code-box .orange  { color: #FF8C00; font-weight: bold; }
+
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #2d2d2d, #FF8C00);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .nav-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .logo-area {
+            position: fixed;
+            top: 15px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .logo-image {
+            max-width: 120px;
+            height: auto;
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: #6e6e73;
+            font-size: 16px;
+            z-index: 1000;
+            font-weight: 500;
+        }
+
+        .cover-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f7 50%, #ffffff 100%);
+            padding: 60px 80px 140px 80px;
+        }
+
+        .cover-title {
+            font-size: 52px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #2d2d2d, #FF8C00, #2d2d2d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: gradient 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cover-subtitle {
+            font-size: 28px;
+            color: #6e6e73;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .cover-info {
+            font-size: 18px;
+            color: #1d1d1f;
+            margin-top: 30px;
+            line-height: 1.6;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 18px;
+            border: 1px solid #e5e5e7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.15);
+            border-color: #FF8C00;
+        }
+
+        .feature-card h4 {
+            font-size: 19px;
+            color: #2d2d2d;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #1d1d1f;
+            line-height: 1.4;
+        }
+
+        .output-box {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: 'Courier New', monospace;
+            color: #58a6ff;
+            font-size: 13px;
+            margin-top: 10px;
+            border-left: 3px solid #238636;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #2d2d2d, #3d3d3d);
+            border-radius: 14px;
+            padding: 22px;
+            color: white;
+            text-align: center;
+        }
+
+        .stat-card .stat-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: #FF8C00;
+            margin-bottom: 6px;
+        }
+
+        .stat-card .stat-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .ml-card {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 14px;
+            padding: 18px;
+            color: white;
+            border-left: 4px solid #FF8C00;
+        }
+
+        .ml-card h4 {
+            color: #FF8C00;
+            font-size: 17px;
+            margin-bottom: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .ml-card p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #FF8C00;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .section-divider {
+            background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 80px 140px 80px;
+        }
+
+        .section-divider .section-label {
+            font-size: 18px;
+            color: #FF8C00;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .section-divider .section-title {
+            font-size: 52px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .section-divider .section-subtitle {
+            font-size: 22px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-area">
+        <img src="../../assets/images/lead-logo.png" alt="Lead University" class="logo-image">
+    </div>
+
+    <div class="slide-number">
+        <span id="currentSlide">1</span> / <span id="totalSlides">14</span>
+    </div>
+
+    <div class="presentation-container">
+
+        <!-- ==================== SLIDE 1: PORTADA ==================== -->
+        <div class="slide cover-slide active">
+            <h1 class="cover-title">Trigonometr&iacute;a anal&iacute;tica en Python</h1>
+            <p class="cover-subtitle">Semana 13: del c&iacute;rculo unitario a la codificaci&oacute;n c&iacute;clica</p>
+            <div class="cover-info">
+                <p>TTCT0023 - Matem&aacute;tica b&aacute;sica para ciencia de datos<br>
+                Profesor: Jordy Alfaro Brenes<br>
+                Lead University<br>
+                I Cuatrimestre 2026</p>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 2: PUENTE ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Lo que vimos en el iPad, ahora en c&oacute;digo</h2>
+                <p class="slide-subtitle">Trigonometr&iacute;a: de la teor&iacute;a a NumPy, SymPy y Matplotlib</p>
+            </div>
+            <div class="slide-content">
+                <div class="three-columns">
+                    <div class="stat-card">
+                        <div class="stat-value">&Aacute;ngulos</div>
+                        <div class="stat-label">Radianes, conversiones, np.radians()</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">C&iacute;rculo unitario</div>
+                        <div class="stat-label">sin, cos, tan: vectorizadas en NumPy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">Aplicaciones</div>
+                        <div class="stat-label">Codificaci&oacute;n c&iacute;clica, Fourier, similaridad</div>
+                    </div>
+                </div>
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Concepto matem&aacute;tico</th>
+                                <th>Herramienta Python</th>
+                                <th>Aplicaci&oacute;n en DS/ML</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Conversiones grados &harr; radianes</td>
+                                <td><code>np.radians(), np.degrees()</code></td>
+                                <td>Toda funci&oacute;n trig en Python espera radianes</td>
+                            </tr>
+                            <tr>
+                                <td>sin(&theta;), cos(&theta;), tan(&theta;)</td>
+                                <td><code>np.sin(), np.cos(), np.tan()</code></td>
+                                <td>Codificaci&oacute;n posicional en transformers</td>
+                            </tr>
+                            <tr>
+                                <td>Identidades trigonom&eacute;tricas</td>
+                                <td><code>sp.trigsimp(), sp.expand_trig()</code></td>
+                                <td>Simplificaci&oacute;n simb&oacute;lica, verificaci&oacute;n</td>
+                            </tr>
+                            <tr>
+                                <td>Ecuaciones trigonom&eacute;tricas</td>
+                                <td><code>sp.solveset()</code></td>
+                                <td>Detectar cruces por umbral en se&ntilde;ales</td>
+                            </tr>
+                            <tr>
+                                <td>Funciones hiperb&oacute;licas</td>
+                                <td><code>np.tanh(), np.sinh(), np.cosh()</code></td>
+                                <td>Activaciones: tanh, GELU en redes neuronales</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="highlight-box">
+                    <p>La trigonometr&iacute;a es el lenguaje matem&aacute;tico que sustenta los transformers (ChatGPT, Claude, Gemini), el procesamiento de se&ntilde;ales y la codificaci&oacute;n de datos c&iacute;clicos como hora, d&iacute;a o mes.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 3: FUNCIONES TRIG EN NUMPY ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Funciones trigonom&eacute;tricas en NumPy</h2>
+                <p class="slide-subtitle">Vectorizadas, r&aacute;pidas y siempre en radianes</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># === Conversiones ===</span>
+angulo_deg = <span class="number">45</span>
+angulo_rad = np.radians(angulo_deg)  <span class="comment"># 0.7854</span>
+angulo_deg2 = np.degrees(angulo_rad) <span class="comment"># 45.0</span>
+
+<span class="comment"># Vectorizar: convertir arrays completos</span>
+notables = np.array([<span class="number">0</span>, <span class="number">30</span>, <span class="number">45</span>, <span class="number">60</span>, <span class="number">90</span>, <span class="number">180</span>, <span class="number">360</span>])
+rads = np.radians(notables)
+
+<span class="comment"># === Funciones directas ===</span>
+theta = np.linspace(<span class="number">0</span>, <span class="number">2</span>*np.pi, <span class="number">360</span>)
+seno = np.sin(theta)      <span class="comment"># 360 valores</span>
+coseno = np.cos(theta)    <span class="comment"># simult&aacute;neamente</span>
+tangente = np.tan(theta)
+
+<span class="comment"># === Funciones inversas ===</span>
+vals = np.array([-<span class="number">1</span>, -<span class="number">0.5</span>, <span class="number">0</span>, <span class="number">0.5</span>, <span class="number">1.0</span>])
+np.arcsin(vals)  <span class="comment"># [-&pi;/2, ..., &pi;/2]</span>
+np.arccos(vals)  <span class="comment"># [&pi;, ..., 0]</span>
+np.arctan(vals)  <span class="comment"># (-&pi;/2, &pi;/2)</span>
+
+<span class="comment"># arctan2: resuelve el cuadrante correcto</span>
+y = np.array([<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>])
+x = np.array([<span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>])
+np.arctan2(y, x)  <span class="comment"># [&pi;/4, -&pi;/4, -3&pi;/4, 3&pi;/4]</span>
+                    </div>
+                    <div>
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Funci&oacute;n</th>
+                                        <th>NumPy</th>
+                                        <th>Dominio &rarr; Rango</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Seno</td>
+                                        <td><code>np.sin(x)</code></td>
+                                        <td>R &rarr; [&minus;1, 1]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Coseno</td>
+                                        <td><code>np.cos(x)</code></td>
+                                        <td>R &rarr; [&minus;1, 1]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tangente</td>
+                                        <td><code>np.tan(x)</code></td>
+                                        <td>R\{&pi;/2+n&pi;} &rarr; R</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arcoseno</td>
+                                        <td><code>np.arcsin(x)</code></td>
+                                        <td>[&minus;1,1] &rarr; [&minus;&pi;/2, &pi;/2]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arcocoseno</td>
+                                        <td><code>np.arccos(x)</code></td>
+                                        <td>[&minus;1,1] &rarr; [0, &pi;]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arcotangente</td>
+                                        <td><code>np.arctan(x)</code></td>
+                                        <td>R &rarr; (&minus;&pi;/2, &pi;/2)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="key-point" style="margin-top: 15px;">
+                            <h4>Aliases en NumPy 2.x</h4>
+                            <p>Desde NumPy 2.0 existen aliases cortos: <code>np.asin</code>, <code>np.acos</code>, <code>np.atan</code>. Las versiones <code>np.arcsin</code>, <code>np.arccos</code>, etc. <strong>siguen vigentes</strong> y no est&aacute;n deprecadas.</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Regla de oro: NumPy siempre trabaja en radianes. np.sin(90) NO da 1 porque 90 se interpreta como radianes. Siempre convertir: np.sin(np.radians(90)).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 4: VISUALIZACION TRIG ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Visualizar funciones trigonom&eacute;tricas</h2>
+                <p class="slide-subtitle">Matplotlib: gr&aacute;ficas de sin, cos, tan y sus propiedades</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+x = np.linspace(-<span class="number">2</span>*np.pi, <span class="number">2</span>*np.pi, <span class="number">500</span>)
+
+fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">5</span>),
+                          layout=<span class="string">'constrained'</span>)
+
+<span class="comment"># Seno</span>
+axes[<span class="number">0</span>].plot(x, np.sin(x), lw=<span class="number">2.5</span>, color=<span class="string">'#FF8C00'</span>)
+axes[<span class="number">0</span>].set_title(<span class="string">'sin(x)'</span>)
+axes[<span class="number">0</span>].axhline(y=<span class="number">0</span>, color=<span class="string">'k'</span>, lw=<span class="number">0.5</span>)
+axes[<span class="number">0</span>].grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+
+<span class="comment"># Coseno</span>
+axes[<span class="number">1</span>].plot(x, np.cos(x), lw=<span class="number">2.5</span>, color=<span class="string">'#2d2d2d'</span>)
+axes[<span class="number">1</span>].set_title(<span class="string">'cos(x)'</span>)
+axes[<span class="number">1</span>].axhline(y=<span class="number">0</span>, color=<span class="string">'k'</span>, lw=<span class="number">0.5</span>)
+axes[<span class="number">1</span>].grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+
+<span class="comment"># Tangente (con np.nan para as&iacute;ntotas)</span>
+y_tan = np.tan(x)
+y_tan[np.abs(y_tan) > <span class="number">10</span>] = np.nan
+axes[<span class="number">2</span>].plot(x, y_tan, lw=<span class="number">2.5</span>, color=<span class="string">'#006847'</span>)
+axes[<span class="number">2</span>].set_title(<span class="string">'tan(x)'</span>)
+axes[<span class="number">2</span>].set_ylim(-<span class="number">5</span>, <span class="number">5</span>)
+axes[<span class="number">2</span>].grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+
+<span class="keyword">for</span> ax <span class="keyword">in</span> axes:
+    ax.axvline(x=<span class="number">0</span>, color=<span class="string">'k'</span>, lw=<span class="number">0.5</span>)
+    ax.set_xlabel(<span class="string">'x (radianes)'</span>)
+plt.show()
+                    </div>
+                    <div>
+                        <div class="three-columns">
+                            <div class="ml-card">
+                                <div class="badge">sin(x)</div>
+                                <h4>Per&iacute;odo: 2&pi;</h4>
+                                <p>Rango: [&minus;1, 1]. Impar: sin(&minus;x) = &minus;sin(x). Empieza en 0.</p>
+                            </div>
+                            <div class="ml-card">
+                                <div class="badge">cos(x)</div>
+                                <h4>Per&iacute;odo: 2&pi;</h4>
+                                <p>Rango: [&minus;1, 1]. Par: cos(&minus;x) = cos(x). Empieza en 1.</p>
+                            </div>
+                            <div class="ml-card">
+                                <div class="badge">tan(x)</div>
+                                <h4>Per&iacute;odo: &pi;</h4>
+                                <p>Rango: R. AV en x = &pi;/2 + n&pi;. Usar np.nan para graficar.</p>
+                            </div>
+                        </div>
+                        <div class="key-point" style="margin-top: 15px;">
+                            <h4>El truco de np.nan (de nuevo)</h4>
+                            <p>Igual que con funciones racionales, reemplazamos valores extremos de tan(x) con <code>np.nan</code> para evitar l&iacute;neas espurias. Matplotlib no dibuja l&iacute;neas donde hay <code>nan</code>.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Relaci&oacute;n fundamental</h4>
+                            <p>cos(x) = sin(x + &pi;/2). El coseno es el seno desplazado &pi;/2 a la izquierda. Esta relaci&oacute;n de fase aparece en la codificaci&oacute;n posicional de los transformers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 5: IDENTIDADES EN SYMPY ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Identidades trigonom&eacute;tricas en SymPy</h2>
+                <p class="slide-subtitle">trigsimp(), expand_trig() y verificaci&oacute;n autom&aacute;tica</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> sympy <span class="keyword">as</span> sp
+
+x, y = sp.symbols(<span class="string">'x y'</span>)
+
+<span class="comment"># === Verificar identidad pitag&oacute;rica ===</span>
+expr = sp.sin(x)**<span class="number">2</span> + sp.cos(x)**<span class="number">2</span>
+<span class="keyword">print</span>(sp.trigsimp(expr))  <span class="comment"># &rarr; 1</span>
+
+<span class="comment"># === Expandir identidades de suma ===</span>
+<span class="keyword">print</span>(sp.expand_trig(sp.sin(x + y)))
+<span class="comment"># &rarr; sin(x)cos(y) + sin(y)cos(x)</span>
+
+<span class="keyword">print</span>(sp.expand_trig(sp.cos(x + y)))
+<span class="comment"># &rarr; cos(x)cos(y) - sin(x)sin(y)</span>
+
+<span class="comment"># === &Aacute;ngulo doble ===</span>
+<span class="keyword">print</span>(sp.expand_trig(sp.sin(<span class="number">2</span>*x)))
+<span class="comment"># &rarr; 2*sin(x)*cos(x)</span>
+
+<span class="keyword">print</span>(sp.expand_trig(sp.cos(<span class="number">2</span>*x)))
+<span class="comment"># &rarr; 2*cos(x)**2 - 1</span>
+
+<span class="comment"># === Simplificaci&oacute;n inversa ===</span>
+expr2 = sp.sin(x)*sp.cos(y) + sp.cos(x)*sp.sin(y)
+<span class="keyword">print</span>(sp.trigsimp(expr2))
+<span class="comment"># &rarr; sin(x + y)</span>
+
+<span class="comment"># === Simplificaci&oacute;n avanzada ===</span>
+expr3 = sp.sin(x)*sp.tan(x)/sp.sec(x)
+<span class="keyword">print</span>(sp.trigsimp(expr3))
+<span class="comment"># &rarr; sin(x)**2</span>
+                    </div>
+                    <div>
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Funci&oacute;n SymPy</th>
+                                        <th>Qu&eacute; hace</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>sp.trigsimp(expr)</code></td>
+                                        <td>Simplifica: reduce a forma m&aacute;s simple</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>sp.expand_trig(expr)</code></td>
+                                        <td>Expande: sin(A+B) &rarr; componentes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>expr.rewrite(sp.cos)</code></td>
+                                        <td>Reescribe todo en t&eacute;rminos de cos</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>sp.trigsimp(inverse=True)</code></td>
+                                        <td>Cancela asin(sin(x)) &rarr; x</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="key-point" style="margin-top: 15px;">
+                            <h4>trigsimp vs expand_trig</h4>
+                            <p><code>trigsimp()</code> <strong>comprime</strong>: convierte sumas de productos en funciones de sumas. <code>expand_trig()</code> <strong>expande</strong>: descompone sin(A+B) en sus componentes. Son operaciones inversas.</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>SymPy verifica identidades autom&aacute;ticamente. Si trigsimp(expresi&oacute;n) da un resultado simple (como 1), acabamos de demostrar una identidad.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 6: ECUACIONES TRIG EN SYMPY ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Ecuaciones trigonom&eacute;tricas con SymPy</h2>
+                <p class="slide-subtitle">solveset() para soluciones generales y en intervalos</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">from</span> sympy <span class="keyword">import</span> *
+
+x = symbols(<span class="string">'x'</span>)
+
+<span class="comment"># === sin(x) = 1/2: soluci&oacute;n general ===</span>
+sol = solveset(sin(x) - Rational(<span class="number">1</span>,<span class="number">2</span>), x,
+               domain=S.Reals)
+<span class="keyword">print</span>(sol)
+<span class="comment"># Union(ImageSet(n, 2n&pi;+&pi;/6),</span>
+<span class="comment">#        ImageSet(n, 2n&pi;+5&pi;/6))</span>
+
+<span class="comment"># === sin(x) = 1/2 en [0, 2&pi;) ===</span>
+sol_int = solveset(sin(x) - Rational(<span class="number">1</span>,<span class="number">2</span>), x,
+                    domain=Interval(<span class="number">0</span>, <span class="number">2</span>*pi,
+                    <span class="keyword">False</span>, <span class="keyword">True</span>))
+<span class="keyword">print</span>(sol_int)  <span class="comment"># {&pi;/6, 5&pi;/6}</span>
+
+<span class="comment"># === 2sin&sup2;(x) - 1 = 0 en [0, 2&pi;) ===</span>
+sol2 = solveset(<span class="number">2</span>*sin(x)**<span class="number">2</span> - <span class="number">1</span>, x,
+                 domain=Interval(<span class="number">0</span>, <span class="number">2</span>*pi,
+                 <span class="keyword">False</span>, <span class="keyword">True</span>))
+<span class="keyword">print</span>(sol2)
+<span class="comment"># {&pi;/4, 3&pi;/4, 5&pi;/4, 7&pi;/4}</span>
+
+<span class="comment"># === cos(2x) = cos(x) en [0, 2&pi;) ===</span>
+sol3 = solveset(cos(<span class="number">2</span>*x) - cos(x), x,
+                 domain=Interval(<span class="number">0</span>, <span class="number">2</span>*pi,
+                 <span class="keyword">False</span>, <span class="keyword">True</span>))
+<span class="keyword">print</span>(sol3)
+                    </div>
+                    <div>
+                        <div class="output-box">
+sin(x) = 1/2 en [0, 2&pi;): {&pi;/6, 5&pi;/6}
+
+2sin&sup2;(x) - 1 = 0: {&pi;/4, 3&pi;/4, 5&pi;/4, 7&pi;/4}
+                        </div>
+                        <div class="key-point" style="margin-top: 15px;">
+                            <h4>Interval(0, 2*pi, False, True)</h4>
+                            <p>El tercer argumento indica si el extremo izquierdo es abierto (<code>False</code> = cerrado). El cuarto, si el derecho es abierto (<code>True</code> = abierto). As&iacute; obtenemos [0, 2&pi;).</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Rational(1, 2) vs 0.5</h4>
+                            <p>Usar <code>Rational(1, 2)</code> o <code>S(1)/2</code> para obtener soluciones exactas. Con <code>0.5</code> (flotante), SymPy puede dar aproximaciones num&eacute;ricas en vez de fracciones de &pi;.</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Aplicaci&oacute;n: si modelamos generaci&oacute;n solar como P(t) = A&middot;sin(2&pi;t/24 &minus; &pi;/2), resolver P(t) = umbral nos dice las horas del d&iacute;a en que la generaci&oacute;n supera ese nivel.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 7: DIVISOR SECCION ==================== -->
+        <div class="slide section-divider">
+            <p class="section-label">Aplicaciones en ciencia de datos</p>
+            <h2 class="section-title">Codificaci&oacute;n c&iacute;clica</h2>
+            <p class="section-subtitle">Transformar hora, d&iacute;a y mes en features que respetan la periodicidad</p>
+        </div>
+
+        <!-- ==================== SLIDE 8: CODIFICACION CICLICA ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Codificaci&oacute;n c&iacute;clica de variables temporales</h2>
+                <p class="slide-subtitle">El problema: hora 23 est&aacute; cerca de hora 0, pero num&eacute;ricamente parecen lejanas</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+
+<span class="keyword">def</span> <span class="func">codificar_ciclico</span>(df, columna, periodo):
+    <span class="comment">"""Codifica variable c&iacute;clica con sin/cos."""</span>
+    df[<span class="string">f'{columna}_sin'</span>] = np.sin(
+        <span class="number">2</span> * np.pi * df[columna] / periodo)
+    df[<span class="string">f'{columna}_cos'</span>] = np.cos(
+        <span class="number">2</span> * np.pi * df[columna] / periodo)
+    <span class="keyword">return</span> df
+
+<span class="comment"># Ejemplo: codificar hora del d&iacute;a</span>
+df = pd.DataFrame({<span class="string">'hora'</span>: range(<span class="number">24</span>)})
+df = codificar_ciclico(df, <span class="string">'hora'</span>, <span class="number">24</span>)
+
+<span class="comment"># Verificar: hora 23 y hora 0 est&aacute;n CERCA</span>
+h23 = np.array([df.loc[<span class="number">23</span>, <span class="string">'hora_sin'</span>],
+                df.loc[<span class="number">23</span>, <span class="string">'hora_cos'</span>]])
+h0 = np.array([df.loc[<span class="number">0</span>, <span class="string">'hora_sin'</span>],
+               df.loc[<span class="number">0</span>, <span class="string">'hora_cos'</span>]])
+dist = np.linalg.norm(h23 - h0)
+<span class="keyword">print</span>(<span class="string">f"Distancia 23&rarr;0: {dist:.3f}"</span>)
+<span class="comment"># &asymp; 0.264 (cerca, como debe ser)</span>
+
+<span class="comment"># Comparar: distancia 23&rarr;12</span>
+h12 = np.array([df.loc[<span class="number">12</span>, <span class="string">'hora_sin'</span>],
+                df.loc[<span class="number">12</span>, <span class="string">'hora_cos'</span>]])
+dist2 = np.linalg.norm(h23 - h12)
+<span class="keyword">print</span>(<span class="string">f"Distancia 23&rarr;12: {dist2:.3f}"</span>)
+<span class="comment"># &asymp; 1.802 (lejos, correcto)</span>
+                    </div>
+                    <div>
+                        <div class="key-point">
+                            <h4>El problema</h4>
+                            <p>Si usamos la hora como n&uacute;mero crudo (0, 1, ..., 23), un modelo de ML pensar&iacute;a que hora 23 y hora 0 est&aacute;n a distancia 23. Pero en realidad est&aacute;n a 1 hora de diferencia.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>La soluci&oacute;n: mapear al c&iacute;rculo unitario</h4>
+                            <p>x<sub>sin</sub> = sin(2&pi; &middot; x / T), x<sub>cos</sub> = cos(2&pi; &middot; x / T), donde T es el per&iacute;odo. Cada valor se convierte en un punto <strong>&uacute;nico</strong> del c&iacute;rculo unitario (sin, cos).</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>&iquest;Por qu&eacute; necesitamos AMBAS componentes?</h4>
+                            <p>Solo con seno: sin(6h) = sin(18h) para T=24. No podr&iacute;amos distinguir las 6am de las 6pm. El coseno rompe esa ambig&uuml;edad: cos(6h) &ne; cos(18h).</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Per&iacute;odos comunes: hora &rarr; T=24, d&iacute;a de semana &rarr; T=7, mes &rarr; T=12, d&iacute;a del a&ntilde;o &rarr; T=365.25. Esto aplica directamente en sus proyectos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 9: APLICACION CR ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Aplicaci&oacute;n CR: radar chart de energ&iacute;a + codificaci&oacute;n temporal</h2>
+                <p class="slide-subtitle">Datos CENCE/ICE y BCCR con funciones trigonom&eacute;tricas</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+<span class="comment"># === Radar chart: matriz energ&eacute;tica CR ===</span>
+fuentes = [<span class="string">'Hidro'</span>, <span class="string">'E&oacute;lica'</span>, <span class="string">'Geo'</span>,
+           <span class="string">'Solar'</span>, <span class="string">'Biomasa'</span>, <span class="string">'T&eacute;rmica'</span>]
+pcts = [<span class="number">67.5</span>, <span class="number">15.3</span>, <span class="number">13.8</span>, <span class="number">1.8</span>, <span class="number">0.9</span>, <span class="number">0.7</span>]
+
+<span class="comment"># &Aacute;ngulos equidistantes en el c&iacute;rculo</span>
+n = len(fuentes)
+angulos = np.linspace(<span class="number">0</span>, <span class="number">2</span>*np.pi, n,
+                       endpoint=<span class="keyword">False</span>).tolist()
+
+<span class="comment"># Cerrar el pol&iacute;gono</span>
+vals = pcts + pcts[:<span class="number">1</span>]
+angulos += angulos[:<span class="number">1</span>]
+
+fig, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">7</span>),
+    subplot_kw=<span class="keyword">dict</span>(polar=<span class="keyword">True</span>))
+ax.plot(angulos, vals, <span class="string">'o-'</span>, lw=<span class="number">2</span>,
+        color=<span class="string">'#006847'</span>)
+ax.fill(angulos, vals, alpha=<span class="number">0.25</span>,
+        color=<span class="string">'#006847'</span>)
+ax.set_thetagrids(
+    np.degrees(angulos[:-<span class="number">1</span>]), fuentes)
+ax.set_theta_offset(np.pi/<span class="number">2</span>)
+ax.set_theta_direction(-<span class="number">1</span>)
+ax.set_title(<span class="string">'Matriz energ&eacute;tica de CR'</span>)
+plt.show()
+                    </div>
+                    <div>
+                        <div class="key-point">
+                            <h4>&Aacute;ngulos equidistantes</h4>
+                            <p>Cada variable se ubica a &theta;<sub>i</sub> = 2&pi;i/n. Con 6 fuentes: 0&deg;, 60&deg;, 120&deg;, 180&deg;, 240&deg;, 300&deg;. Esto es exactamente el c&iacute;rculo unitario con n puntos.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Proyecci&oacute;n polar en Matplotlib</h4>
+                            <p><code>subplot_kw=dict(polar=True)</code> activa coordenadas polares. <code>set_theta_offset(&pi;/2)</code> pone el 0&deg; arriba. <code>set_theta_direction(-1)</code> gira en sentido horario.</p>
+                        </div>
+                        <div class="content-box" style="margin-top: 12px;">
+                            <h3>Generaci&oacute;n solar: sinusoide casi perfecta</h3>
+                            <p>Los datos del CENCE muestran que la generaci&oacute;n solar sigue un patr&oacute;n P(t) &asymp; A&middot;sin(2&pi;t/24 &minus; &pi;/2): cero en la noche, m&aacute;ximo al mediod&iacute;a, y sigue la forma de una sinusoide positiva. La generaci&oacute;n e&oacute;lica tiene un patr&oacute;n complementario, desfasado aproximadamente &pi; radianes respecto a la solar.</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Estos patrones c&iacute;clicos son ideales para aplicar codificaci&oacute;n sin/cos. Si su proyecto usa datos temporales, esta t&eacute;cnica mejora significativamente los modelos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 10: DIVISOR SECCION ==================== -->
+        <div class="slide section-divider">
+            <p class="section-label">Machine learning</p>
+            <h2 class="section-title">Trigonometr&iacute;a en el coraz&oacute;n del ML</h2>
+            <p class="section-subtitle">Codificaci&oacute;n posicional, activaciones y similaridad coseno</p>
+        </div>
+
+        <!-- ==================== SLIDE 11: CODIFICACION POSICIONAL ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Codificaci&oacute;n posicional en transformers</h2>
+                <p class="slide-subtitle">C&oacute;mo ChatGPT, Claude y Gemini saben la posici&oacute;n de cada palabra</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+<span class="keyword">def</span> <span class="func">codificacion_posicional</span>(max_len, d_model):
+    <span class="comment">"""Codificaci&oacute;n posicional sinusoidal."""</span>
+    pe = np.zeros((max_len, d_model))
+    pos = np.arange(max_len)[:, np.newaxis]
+    div = np.exp(np.arange(<span class="number">0</span>, d_model, <span class="number">2</span>)
+                 * -(np.log(<span class="number">10000</span>) / d_model))
+    pe[:, <span class="number">0</span>::<span class="number">2</span>] = np.sin(pos * div)  <span class="comment"># pares</span>
+    pe[:, <span class="number">1</span>::<span class="number">2</span>] = np.cos(pos * div)  <span class="comment"># impares</span>
+    <span class="keyword">return</span> pe
+
+<span class="comment"># Generar y visualizar</span>
+pe = codificacion_posicional(<span class="number">50</span>, <span class="number">64</span>)
+
+fig, ax = plt.subplots(figsize=(<span class="number">12</span>, <span class="number">5</span>),
+                        layout=<span class="string">'constrained'</span>)
+im = ax.imshow(pe, aspect=<span class="string">'auto'</span>,
+               cmap=<span class="string">'RdYlBu'</span>)
+ax.set_xlabel(<span class="string">'Dimensi&oacute;n del modelo'</span>)
+ax.set_ylabel(<span class="string">'Posici&oacute;n de la palabra'</span>)
+ax.set_title(<span class="string">'Codificaci&oacute;n posicional sinusoidal'</span>)
+fig.colorbar(im, ax=ax)
+plt.show()
+                    </div>
+                    <div>
+                        <div class="key-point">
+                            <h4>La idea central</h4>
+                            <p>Los transformers procesan todas las palabras en paralelo (no secuencialmente). Necesitan un mecanismo para saber <strong>d&oacute;nde</strong> est&aacute; cada palabra. La soluci&oacute;n: sumar un vector de senos y cosenos &uacute;nico para cada posici&oacute;n.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Las f&oacute;rmulas</h4>
+                            <p>PE(pos, 2i) = sin(pos / 10000<sup>2i/d</sup>)<br>
+                            PE(pos, 2i+1) = cos(pos / 10000<sup>2i/d</sup>)<br>
+                            Cada dimensi&oacute;n usa una frecuencia diferente: las primeras cambian r&aacute;pido, las &uacute;ltimas lento.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>&iquest;Por qu&eacute; sin y cos?</h4>
+                            <p>Gracias a las identidades de suma: PE(pos+k) es una <strong>rotaci&oacute;n</strong> de PE(pos). Esto permite al modelo aprender relaciones posicionales relativas, no solo absolutas.</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Esta es la aplicaci&oacute;n directa de las identidades de suma que vimos en el iPad: sin(A+B) = sinA&middot;cosB + cosA&middot;sinB es lo que permite que la posici&oacute;n (pos+k) sea una transformaci&oacute;n lineal de la posici&oacute;n (pos).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 12: HIPERBOLICAS Y ACTIVACIONES ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Funciones hiperb&oacute;licas y activaciones neuronales</h2>
+                <p class="slide-subtitle">tanh y GELU: la trigonometr&iacute;a dentro de las redes neuronales</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+x = np.linspace(-<span class="number">5</span>, <span class="number">5</span>, <span class="number">1000</span>)
+
+<span class="comment"># === Funciones hiperb&oacute;licas ===</span>
+sinh = np.sinh(x)   <span class="comment"># (e^x - e^-x)/2</span>
+cosh = np.cosh(x)   <span class="comment"># (e^x + e^-x)/2</span>
+tanh = np.tanh(x)   <span class="comment"># sinh/cosh</span>
+
+<span class="comment"># === tanh como activaci&oacute;n ===</span>
+<span class="comment"># Rango: (-1, 1), centrada en 0</span>
+<span class="comment"># Usada en RNNs, LSTMs</span>
+activacion_tanh = np.tanh(x)
+
+<span class="comment"># === GELU (aprox. tanh) ===</span>
+<span class="comment"># Activaci&oacute;n est&aacute;ndar en BERT, GPT</span>
+<span class="keyword">def</span> <span class="func">gelu</span>(x):
+    <span class="keyword">return</span> <span class="number">0.5</span> * x * (<span class="number">1</span> + np.tanh(
+        np.sqrt(<span class="number">2</span>/np.pi) *
+        (x + <span class="number">0.044715</span> * x**<span class="number">3</span>)))
+
+activacion_gelu = gelu(x)
+
+<span class="comment"># === Identidad hiperb&oacute;lica ===</span>
+check = np.cosh(x)**<span class="number">2</span> - np.sinh(x)**<span class="number">2</span>
+<span class="keyword">print</span>(np.allclose(check, <span class="number">1</span>))  <span class="comment"># True</span>
+<span class="comment"># An&aacute;logo a sin&sup2; + cos&sup2; = 1</span>
+<span class="comment"># pero con signo opuesto: cosh&sup2; - sinh&sup2; = 1</span>
+                    </div>
+                    <div>
+                        <div class="three-columns">
+                            <div class="ml-card">
+                                <div class="badge">tanh</div>
+                                <h4>Rango: (&minus;1, 1)</h4>
+                                <p>Centrada en 0, suave. Usada en RNNs y como gate en LSTMs. tanh(x) = (e<sup>x</sup>&minus;e<sup>&minus;x</sup>)/(e<sup>x</sup>+e<sup>&minus;x</sup>).</p>
+                            </div>
+                            <div class="ml-card">
+                                <div class="badge">GELU</div>
+                                <h4>Activaci&oacute;n de GPT</h4>
+                                <p>GELU(x) &asymp; 0.5x(1+tanh(&radic;(2/&pi;)(x+0.04x&sup3;))). Contiene tanh y la constante &radic;(2/&pi;).</p>
+                            </div>
+                            <div class="ml-card">
+                                <div class="badge">Sigmoid</div>
+                                <h4>&sigma;(x) = (1+tanh(x/2))/2</h4>
+                                <p>La sigmoide se puede escribir en t&eacute;rminos de tanh. Rango: (0, 1). Usada en clasificaci&oacute;n binaria.</p>
+                            </div>
+                        </div>
+                        <div class="key-point" style="margin-top: 15px;">
+                            <h4>Conexi&oacute;n con trig circular</h4>
+                            <p>La relaci&oacute;n entre funciones circulares e hiperb&oacute;licas: <strong>tanh(x) = &minus;i&middot;tan(ix)</strong>. Las hiperb&oacute;licas son las circulares evaluadas en argumentos imaginarios. Misma estructura, diferente geometr&iacute;a.</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Cada vez que un LLM genera una palabra, la aproximaci&oacute;n tanh de GELU se calcula billones de veces. La tangente hiperb&oacute;lica del prec&aacute;lculo es infraestructura del deep learning moderno.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 13: SIMILARIDAD COSENO ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Similaridad coseno y an&aacute;lisis de Fourier</h2>
+                <p class="slide-subtitle">La m&eacute;trica trigonom&eacute;trica m&aacute;s usada en ML + detecci&oacute;n de periodicidad</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># === Similaridad coseno ===</span>
+<span class="keyword">def</span> <span class="func">sim_coseno</span>(a, b):
+    <span class="comment">"""cos(&theta;) entre vectores a y b."""</span>
+    <span class="keyword">return</span> np.dot(a, b) / (
+        np.linalg.norm(a) * np.linalg.norm(b))
+
+<span class="comment"># Perfiles tur&iacute;sticos de provincias CR</span>
+<span class="comment"># [playa, monta&ntilde;a, cultura, aventura, gastro]</span>
+san_jose = np.array([<span class="number">0.2</span>,<span class="number">0.3</span>,<span class="number">0.9</span>,<span class="number">0.4</span>,<span class="number">0.8</span>])
+guanacaste = np.array([<span class="number">0.95</span>,<span class="number">0.2</span>,<span class="number">0.3</span>,<span class="number">0.7</span>,<span class="number">0.5</span>])
+cartago = np.array([<span class="number">0.1</span>,<span class="number">0.9</span>,<span class="number">0.7</span>,<span class="number">0.5</span>,<span class="number">0.4</span>])
+
+<span class="keyword">print</span>(<span class="string">f"SJ-Cartago:    {sim_coseno(san_jose, cartago):.3f}"</span>)
+<span class="keyword">print</span>(<span class="string">f"SJ-Guanacaste: {sim_coseno(san_jose, guanacaste):.3f}"</span>)
+
+<span class="comment"># === FFT: detectar periodicidad ===</span>
+<span class="keyword">from</span> scipy.fft <span class="keyword">import</span> rfft, rfftfreq
+
+<span class="comment"># Simular turismo mensual (10 a&ntilde;os)</span>
+meses = np.arange(<span class="number">120</span>)
+turismo = (<span class="number">200000</span> + <span class="number">1000</span>*meses +
+    <span class="number">50000</span>*np.sin(<span class="number">2</span>*np.pi*meses/<span class="number">12</span>) +
+    np.random.normal(<span class="number">0</span>, <span class="number">5000</span>, <span class="number">120</span>))
+
+fft_vals = rfft(turismo - turismo.mean())
+freqs = rfftfreq(len(turismo))
+magnitud = np.abs(fft_vals)
+<span class="comment"># Pico en freq = 1/12 &rarr; per&iacute;odo de 12 meses</span>
+                    </div>
+                    <div>
+                        <div class="key-point">
+                            <h4>Similaridad coseno</h4>
+                            <p>cos(&theta;) = (a &middot; b) / (||a|| &middot; ||b||). Mide el &aacute;ngulo entre vectores, no su magnitud. Rango: [&minus;1, 1]. Es la m&eacute;trica est&aacute;ndar en NLP (comparar embeddings de palabras) y en b&uacute;squeda sem&aacute;ntica.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>FFT (transformada r&aacute;pida de Fourier)</h4>
+                            <p>Descompone cualquier se&ntilde;al en sus frecuencias componentes. Si una serie temporal tiene estacionalidad, la FFT la detecta como un pico en la frecuencia correspondiente (1/12 para ciclos anuales en datos mensuales).</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Idea de Fourier en una frase</h4>
+                            <p>Cualquier se&ntilde;al peri&oacute;dica se puede escribir como suma de senos y cosenos de diferentes frecuencias. Las identidades trigonom&eacute;tricas de suma son el fundamento algebraico de esta descomposici&oacute;n.</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Para sus proyectos: si sospechan que sus datos tienen estacionalidad, usen scipy.fft.rfft() para confirmarla. Los picos en el espectro les dicen exactamente cu&aacute;l es el per&iacute;odo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 14: RESUMEN ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Resumen semana 13</h2>
+                <p class="slide-subtitle">De &aacute;ngulos y el c&iacute;rculo unitario a aplicaciones en ML</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div>
+                        <div class="key-point">
+                            <h4>Funciones trigonom&eacute;tricas en NumPy</h4>
+                            <p><code>np.sin()</code>, <code>np.cos()</code>, <code>np.tan()</code>: vectorizadas, siempre en radianes. <code>np.radians()</code> y <code>np.degrees()</code> para convertir. <code>np.arctan2(y, x)</code> para el cuadrante correcto.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Identidades y ecuaciones en SymPy</h4>
+                            <p><code>sp.trigsimp()</code> simplifica, <code>sp.expand_trig()</code> expande. <code>sp.solveset()</code> con <code>Interval(0, 2*pi)</code> para soluciones en un intervalo.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Codificaci&oacute;n c&iacute;clica</h4>
+                            <p>x<sub>sin</sub> = sin(2&pi;x/T), x<sub>cos</sub> = cos(2&pi;x/T). Aplicar a hora (T=24), d&iacute;a (T=7), mes (T=12). Necesitan AMBAS componentes para evitar ambig&uuml;edad.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="content-box">
+                            <h3>Entregables y fechas</h3>
+                            <ul>
+                                <li><strong>Taller 5:</strong> fecha de entrega hoy</li>
+                                <li><strong>Quiz 2</strong> (10%): hoy en clase, contenido semanas 7&ndash;12</li>
+                                <li><strong>Semana 14:</strong> funciones trigonom&eacute;tricas (gr&aacute;ficas, amplitud, per&iacute;odo, fase)</li>
+                                <li><strong>Semana 15:</strong> presentaciones finales del proyecto (8%)</li>
+                            </ul>
+                        </div>
+                        <div class="content-box" style="margin-top: 15px;">
+                            <h3>Herramientas nuevas de hoy</h3>
+                            <ul>
+                                <li><code>np.sin()</code>, <code>np.cos()</code>, <code>np.tan()</code> + inversas</li>
+                                <li><code>np.radians()</code>, <code>np.degrees()</code></li>
+                                <li><code>sp.trigsimp()</code>, <code>sp.expand_trig()</code></li>
+                                <li><code>sp.solveset()</code> con <code>Interval</code></li>
+                                <li><code>np.tanh()</code>, <code>np.sinh()</code>, <code>np.cosh()</code></li>
+                                <li><code>scipy.fft.rfft()</code> para an&aacute;lisis de Fourier</li>
+                                <li>Gr&aacute;ficos polares: <code>subplot_kw=dict(polar=True)</code></li>
+                            </ul>
+                        </div>
+                        <div class="highlight-box" style="margin-top: 15px;">
+                            <p>Pr&oacute;xima semana: funciones trigonom&eacute;tricas en detalle. Amplitud, per&iacute;odo, fase, transformaciones y modelado de datos peri&oacute;dicos con regresi&oacute;n sinusoidal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end presentation-container -->
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">&larr; Anterior</button>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Siguiente &rarr;</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            if (n >= totalSlides) currentSlide = totalSlides - 1;
+            else if (n < 0) currentSlide = 0;
+            else currentSlide = n;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('currentSlide').textContent = currentSlide + 1;
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft')  changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>
