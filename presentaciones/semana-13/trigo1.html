@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semana 13: Trigonometr&iacute;a anal&iacute;tica en Python</title>
+    <title>Semana 14: Funciones trigonom&eacute;tricas en Python</title>
     <style>
         * {
             margin: 0;
@@ -470,8 +470,8 @@
 
         <!-- ==================== SLIDE 1: PORTADA ==================== -->
         <div class="slide cover-slide active">
-            <h1 class="cover-title">Trigonometr&iacute;a anal&iacute;tica en Python</h1>
-            <p class="cover-subtitle">Semana 13: del c&iacute;rculo unitario a la codificaci&oacute;n c&iacute;clica</p>
+            <h1 class="cover-title">Funciones trigonom&eacute;tricas en Python</h1>
+            <p class="cover-subtitle">Semana 14: amplitud, per&iacute;odo, fase y aplicaciones a ciencia de datos</p>
             <div class="cover-info">
                 <p>TTCT0023 - Matem&aacute;tica b&aacute;sica para ciencia de datos<br>
                 Profesor: Jordy Alfaro Brenes<br>
@@ -484,21 +484,21 @@
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Lo que vimos en el iPad, ahora en c&oacute;digo</h2>
-                <p class="slide-subtitle">Trigonometr&iacute;a: de la teor&iacute;a a NumPy, SymPy y Matplotlib</p>
+                <p class="slide-subtitle">Cierre de trigonometr&iacute;a anal&iacute;tica + funciones trigonom&eacute;tricas</p>
             </div>
             <div class="slide-content">
                 <div class="three-columns">
                     <div class="stat-card">
-                        <div class="stat-value">&Aacute;ngulos</div>
-                        <div class="stat-label">Radianes, conversiones, np.radians()</div>
+                        <div class="stat-value">Forma general</div>
+                        <div class="stat-label">y(x) = A&middot;sin(B(x&minus;C)) + D</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">C&iacute;rculo unitario</div>
-                        <div class="stat-label">sin, cos, tan: vectorizadas en NumPy</div>
+                        <div class="stat-value">Cuatro par&aacute;metros</div>
+                        <div class="stat-label">Amplitud, per&iacute;odo, fase, l&iacute;nea base</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">Aplicaciones</div>
-                        <div class="stat-label">Codificaci&oacute;n c&iacute;clica, Fourier, similaridad</div>
+                        <div class="stat-value">Datos reales</div>
+                        <div class="stat-label">Ajuste sinusoidal con curve_fit</div>
                     </div>
                 </div>
                 <div class="comparison-table">
@@ -512,40 +512,40 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Conversiones grados &harr; radianes</td>
-                                <td><code>np.radians(), np.degrees()</code></td>
-                                <td>Toda funci&oacute;n trig en Python espera radianes</td>
+                                <td>Funciones sin, cos, tan</td>
+                                <td><code>np.sin(), np.cos(), np.tan()</code></td>
+                                <td>Codificaci&oacute;n c&iacute;clica de variables temporales</td>
                             </tr>
                             <tr>
-                                <td>sin(&theta;), cos(&theta;), tan(&theta;)</td>
-                                <td><code>np.sin(), np.cos(), np.tan()</code></td>
+                                <td>Forma general A&middot;sin(B(x&minus;C))+D</td>
+                                <td>Funci&oacute;n personalizada + matplotlib</td>
+                                <td>Modelado de se&ntilde;ales peri&oacute;dicas</td>
+                            </tr>
+                            <tr>
+                                <td>Identidades de suma</td>
+                                <td><code>sp.expand_trig(), sp.trigsimp()</code></td>
                                 <td>Codificaci&oacute;n posicional en transformers</td>
                             </tr>
                             <tr>
-                                <td>Identidades trigonom&eacute;tricas</td>
-                                <td><code>sp.trigsimp(), sp.expand_trig()</code></td>
-                                <td>Simplificaci&oacute;n simb&oacute;lica, verificaci&oacute;n</td>
+                                <td>Ajuste de modelo a datos</td>
+                                <td><code>scipy.optimize.curve_fit()</code></td>
+                                <td>Predicci&oacute;n de demanda el&eacute;ctrica, mareas</td>
                             </tr>
                             <tr>
-                                <td>Ecuaciones trigonom&eacute;tricas</td>
-                                <td><code>sp.solveset()</code></td>
-                                <td>Detectar cruces por umbral en se&ntilde;ales</td>
-                            </tr>
-                            <tr>
-                                <td>Funciones hiperb&oacute;licas</td>
-                                <td><code>np.tanh(), np.sinh(), np.cosh()</code></td>
-                                <td>Activaciones: tanh, GELU en redes neuronales</td>
+                                <td>Descomposici&oacute;n en frecuencias</td>
+                                <td><code>scipy.fft.rfft()</code></td>
+                                <td>Detecci&oacute;n de estacionalidad, an&aacute;lisis de audio</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="highlight-box">
-                    <p>La trigonometr&iacute;a es el lenguaje matem&aacute;tico que sustenta los transformers (ChatGPT, Claude, Gemini), el procesamiento de se&ntilde;ales y la codificaci&oacute;n de datos c&iacute;clicos como hora, d&iacute;a o mes.</p>
+                    <p>Hoy fusionamos contenidos: cerramos la trigonometr&iacute;a anal&iacute;tica de la semana pasada y vemos las funciones trigonom&eacute;tricas con sus aplicaciones m&aacute;s relevantes en ciencia de datos moderna.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 3: FUNCIONES TRIG EN NUMPY ==================== -->
+        <!-- ==================== SLIDE 3: NUMPY TRIG (de semana 13) ==================== -->
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Funciones trigonom&eacute;tricas en NumPy</h2>
@@ -556,93 +556,56 @@
                     <div class="code-box">
 <span class="keyword">import</span> numpy <span class="keyword">as</span> np
 
-<span class="comment"># === Conversiones ===</span>
-angulo_deg = <span class="number">45</span>
-angulo_rad = np.radians(angulo_deg)  <span class="comment"># 0.7854</span>
-angulo_deg2 = np.degrees(angulo_rad) <span class="comment"># 45.0</span>
+<span class="comment"># === Conversiones grados &harr; radianes ===</span>
+np.radians(<span class="number">180</span>)   <span class="comment"># &rarr; 3.14159...</span>
+np.degrees(np.pi) <span class="comment"># &rarr; 180.0</span>
 
-<span class="comment"># Vectorizar: convertir arrays completos</span>
-notables = np.array([<span class="number">0</span>, <span class="number">30</span>, <span class="number">45</span>, <span class="number">60</span>, <span class="number">90</span>, <span class="number">180</span>, <span class="number">360</span>])
-rads = np.radians(notables)
-
-<span class="comment"># === Funciones directas ===</span>
-theta = np.linspace(<span class="number">0</span>, <span class="number">2</span>*np.pi, <span class="number">360</span>)
-seno = np.sin(theta)      <span class="comment"># 360 valores</span>
+<span class="comment"># === Funciones directas (vectorizadas) ===</span>
+theta = np.linspace(<span class="number">0</span>, <span class="number">2</span>*np.pi, <span class="number">100</span>)
+seno = np.sin(theta)      <span class="comment"># 100 valores</span>
 coseno = np.cos(theta)    <span class="comment"># simult&aacute;neamente</span>
 tangente = np.tan(theta)
 
 <span class="comment"># === Funciones inversas ===</span>
-vals = np.array([-<span class="number">1</span>, -<span class="number">0.5</span>, <span class="number">0</span>, <span class="number">0.5</span>, <span class="number">1.0</span>])
-np.arcsin(vals)  <span class="comment"># [-&pi;/2, ..., &pi;/2]</span>
-np.arccos(vals)  <span class="comment"># [&pi;, ..., 0]</span>
-np.arctan(vals)  <span class="comment"># (-&pi;/2, &pi;/2)</span>
+np.arcsin(<span class="number">0.5</span>)   <span class="comment"># &rarr; &pi;/6</span>
+np.arccos(<span class="number">0</span>)     <span class="comment"># &rarr; &pi;/2</span>
+np.arctan(<span class="number">1</span>)     <span class="comment"># &rarr; &pi;/4</span>
 
-<span class="comment"># arctan2: resuelve el cuadrante correcto</span>
-y = np.array([<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>])
-x = np.array([<span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>])
-np.arctan2(y, x)  <span class="comment"># [&pi;/4, -&pi;/4, -3&pi;/4, 3&pi;/4]</span>
+<span class="comment"># arctan2(y, x): cuadrante correcto</span>
+np.arctan2(<span class="number">1</span>, -<span class="number">1</span>)  <span class="comment"># &rarr; 3&pi;/4 (Q2)</span>
+np.arctan2(-<span class="number">1</span>, -<span class="number">1</span>) <span class="comment"># &rarr; -3&pi;/4 (Q3)</span>
+
+<span class="comment"># === Identidad pitag&oacute;rica (verificaci&oacute;n) ===</span>
+x = np.linspace(<span class="number">0</span>, <span class="number">2</span>*np.pi, <span class="number">50</span>)
+np.allclose(np.sin(x)**<span class="number">2</span> + np.cos(x)**<span class="number">2</span>, <span class="number">1</span>)
+<span class="comment"># &rarr; True</span>
                     </div>
                     <div>
-                        <div class="comparison-table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Funci&oacute;n</th>
-                                        <th>NumPy</th>
-                                        <th>Dominio &rarr; Rango</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Seno</td>
-                                        <td><code>np.sin(x)</code></td>
-                                        <td>R &rarr; [&minus;1, 1]</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Coseno</td>
-                                        <td><code>np.cos(x)</code></td>
-                                        <td>R &rarr; [&minus;1, 1]</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tangente</td>
-                                        <td><code>np.tan(x)</code></td>
-                                        <td>R\{&pi;/2+n&pi;} &rarr; R</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Arcoseno</td>
-                                        <td><code>np.arcsin(x)</code></td>
-                                        <td>[&minus;1,1] &rarr; [&minus;&pi;/2, &pi;/2]</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Arcocoseno</td>
-                                        <td><code>np.arccos(x)</code></td>
-                                        <td>[&minus;1,1] &rarr; [0, &pi;]</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Arcotangente</td>
-                                        <td><code>np.arctan(x)</code></td>
-                                        <td>R &rarr; (&minus;&pi;/2, &pi;/2)</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="key-point">
+                            <h4>Regla de oro</h4>
+                            <p>NumPy <strong>siempre</strong> trabaja en radianes. <code>np.sin(90)</code> NO da 1 porque 90 se interpreta como 90 radianes. Usar siempre <code>np.sin(np.radians(90))</code>.</p>
                         </div>
-                        <div class="key-point" style="margin-top: 15px;">
-                            <h4>Aliases en NumPy 2.x</h4>
-                            <p>Desde NumPy 2.0 existen aliases cortos: <code>np.asin</code>, <code>np.acos</code>, <code>np.atan</code>. Las versiones <code>np.arcsin</code>, <code>np.arccos</code>, etc. <strong>siguen vigentes</strong> y no est&aacute;n deprecadas.</p>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Vectorizaci&oacute;n</h4>
+                            <p>Una sola llamada a <code>np.sin(arr)</code> aplica la funci&oacute;n a millones de valores en microsegundos. Es entre 50 y 100 veces m&aacute;s r&aacute;pido que un bucle Python puro.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>arctan2 vs arctan</h4>
+                            <p><code>arctan(y/x)</code> pierde informaci&oacute;n del cuadrante. <code>arctan2(y, x)</code> recibe los dos argumentos por separado y devuelve el &aacute;ngulo correcto en (&minus;&pi;, &pi;].</p>
                         </div>
                         <div class="highlight-box">
-                            <p>Regla de oro: NumPy siempre trabaja en radianes. np.sin(90) NO da 1 porque 90 se interpreta como radianes. Siempre convertir: np.sin(np.radians(90)).</p>
+                            <p>Estas funciones son la base de todo lo que viene: codificaci&oacute;n c&iacute;clica, ajuste de modelos sinusoidales, positional encoding y similaridad coseno.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 4: VISUALIZACION TRIG ==================== -->
+        <!-- ==================== SLIDE 4: GRAFICAS BASICAS ==================== -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Visualizar funciones trigonom&eacute;tricas</h2>
-                <p class="slide-subtitle">Matplotlib: gr&aacute;ficas de sin, cos, tan y sus propiedades</p>
+                <h2 class="slide-title">Visualizaci&oacute;n con Matplotlib</h2>
+                <p class="slide-subtitle">Gr&aacute;ficas de sin, cos, tan y sus propiedades</p>
             </div>
             <div class="slide-content">
                 <div class="two-columns">
@@ -657,100 +620,329 @@ fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">3</
 
 <span class="comment"># Seno</span>
 axes[<span class="number">0</span>].plot(x, np.sin(x), lw=<span class="number">2.5</span>, color=<span class="string">'#FF8C00'</span>)
-axes[<span class="number">0</span>].set_title(<span class="string">'sin(x)'</span>)
+axes[<span class="number">0</span>].set_title(<span class="string">'sin(x): per&iacute;odo 2&pi;, impar'</span>)
 axes[<span class="number">0</span>].axhline(y=<span class="number">0</span>, color=<span class="string">'k'</span>, lw=<span class="number">0.5</span>)
 axes[<span class="number">0</span>].grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
 
 <span class="comment"># Coseno</span>
 axes[<span class="number">1</span>].plot(x, np.cos(x), lw=<span class="number">2.5</span>, color=<span class="string">'#2d2d2d'</span>)
-axes[<span class="number">1</span>].set_title(<span class="string">'cos(x)'</span>)
-axes[<span class="number">1</span>].axhline(y=<span class="number">0</span>, color=<span class="string">'k'</span>, lw=<span class="number">0.5</span>)
+axes[<span class="number">1</span>].set_title(<span class="string">'cos(x): per&iacute;odo 2&pi;, par'</span>)
 axes[<span class="number">1</span>].grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
 
-<span class="comment"># Tangente (con np.nan para as&iacute;ntotas)</span>
+<span class="comment"># Tangente: nan en as&iacute;ntotas</span>
 y_tan = np.tan(x)
 y_tan[np.abs(y_tan) > <span class="number">10</span>] = np.nan
 axes[<span class="number">2</span>].plot(x, y_tan, lw=<span class="number">2.5</span>, color=<span class="string">'#006847'</span>)
-axes[<span class="number">2</span>].set_title(<span class="string">'tan(x)'</span>)
+axes[<span class="number">2</span>].set_title(<span class="string">'tan(x): per&iacute;odo &pi;, impar'</span>)
 axes[<span class="number">2</span>].set_ylim(-<span class="number">5</span>, <span class="number">5</span>)
 axes[<span class="number">2</span>].grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
 
-<span class="keyword">for</span> ax <span class="keyword">in</span> axes:
-    ax.axvline(x=<span class="number">0</span>, color=<span class="string">'k'</span>, lw=<span class="number">0.5</span>)
-    ax.set_xlabel(<span class="string">'x (radianes)'</span>)
 plt.show()
                     </div>
                     <div>
-                        <div class="three-columns">
-                            <div class="ml-card">
-                                <div class="badge">sin(x)</div>
-                                <h4>Per&iacute;odo: 2&pi;</h4>
-                                <p>Rango: [&minus;1, 1]. Impar: sin(&minus;x) = &minus;sin(x). Empieza en 0.</p>
-                            </div>
-                            <div class="ml-card">
-                                <div class="badge">cos(x)</div>
-                                <h4>Per&iacute;odo: 2&pi;</h4>
-                                <p>Rango: [&minus;1, 1]. Par: cos(&minus;x) = cos(x). Empieza en 1.</p>
-                            </div>
-                            <div class="ml-card">
-                                <div class="badge">tan(x)</div>
-                                <h4>Per&iacute;odo: &pi;</h4>
-                                <p>Rango: R. AV en x = &pi;/2 + n&pi;. Usar np.nan para graficar.</p>
-                            </div>
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Funci&oacute;n</th>
+                                        <th>Dominio</th>
+                                        <th>Rango</th>
+                                        <th>Per&iacute;odo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>sin x</td>
+                                        <td>R</td>
+                                        <td>[&minus;1, 1]</td>
+                                        <td>2&pi;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>cos x</td>
+                                        <td>R</td>
+                                        <td>[&minus;1, 1]</td>
+                                        <td>2&pi;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>tan x</td>
+                                        <td>R \ {&pi;/2 + n&pi;}</td>
+                                        <td>R</td>
+                                        <td>&pi;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="key-point" style="margin-top: 15px;">
-                            <h4>El truco de np.nan (de nuevo)</h4>
-                            <p>Igual que con funciones racionales, reemplazamos valores extremos de tan(x) con <code>np.nan</code> para evitar l&iacute;neas espurias. Matplotlib no dibuja l&iacute;neas donde hay <code>nan</code>.</p>
+                            <h4>El truco de np.nan para la tangente</h4>
+                            <p>Reemplazamos los valores extremos con <code>np.nan</code> para que matplotlib no dibuje l&iacute;neas espurias entre los infinitos positivo y negativo cerca de las as&iacute;ntotas verticales.</p>
                         </div>
                         <div class="key-point" style="margin-top: 12px;">
                             <h4>Relaci&oacute;n fundamental</h4>
-                            <p>cos(x) = sin(x + &pi;/2). El coseno es el seno desplazado &pi;/2 a la izquierda. Esta relaci&oacute;n de fase aparece en la codificaci&oacute;n posicional de los transformers.</p>
+                            <p>cos(x) = sin(x + &pi;/2). El coseno es el seno desplazado &pi;/2 hacia la izquierda. Esta relaci&oacute;n de fase aparece en la codificaci&oacute;n posicional de los transformers.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 5: IDENTIDADES EN SYMPY ==================== -->
+        <!-- ==================== SLIDE 5: FORMA GENERAL ==================== -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Identidades trigonom&eacute;tricas en SymPy</h2>
-                <p class="slide-subtitle">trigsimp(), expand_trig() y verificaci&oacute;n autom&aacute;tica</p>
+                <h2 class="slide-title">La forma general: y(x) = A &middot; sin(B(x &minus; C)) + D</h2>
+                <p class="slide-subtitle">Cuatro par&aacute;metros que describen cualquier sinusoide</p>
             </div>
             <div class="slide-content">
                 <div class="two-columns">
                     <div class="code-box">
-<span class="keyword">import</span> sympy <span class="keyword">as</span> sp
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
 
-x, y = sp.symbols(<span class="string">'x y'</span>)
+<span class="keyword">def</span> <span class="func">sinusoide</span>(x, A, B, C, D):
+    <span class="comment">"""Forma general: A&middot;sin(B(x-C)) + D"""</span>
+    <span class="keyword">return</span> A * np.sin(B * (x - C)) + D
+
+x = np.linspace(<span class="number">0</span>, <span class="number">24</span>, <span class="number">500</span>)
+
+<span class="comment"># Demanda el&eacute;ctrica de Costa Rica (modelo)</span>
+A = <span class="number">400</span>      <span class="comment"># amplitud (MW)</span>
+B = np.pi/<span class="number">12</span> <span class="comment"># per&iacute;odo de 24 h: T = 2&pi;/B</span>
+C = <span class="number">6</span>        <span class="comment"># desfase: m&aacute;ximo a las 12 m.d.</span>
+D = <span class="number">1200</span>     <span class="comment"># l&iacute;nea base (MW)</span>
+
+P = sinusoide(x, A, B, C, D)
+
+fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>),
+                        layout=<span class="string">'constrained'</span>)
+ax.plot(x, P, lw=<span class="number">2.5</span>, color=<span class="string">'#FF8C00'</span>)
+ax.axhline(D, ls=<span class="string">'--'</span>, color=<span class="string">'gray'</span>,
+           label=<span class="string">f'D = {D} MW'</span>)
+ax.fill_between(x, D-A, D+A, alpha=<span class="number">0.1</span>,
+                color=<span class="string">'#FF8C00'</span>)
+ax.set_xlabel(<span class="string">'Hora del d&iacute;a'</span>)
+ax.set_ylabel(<span class="string">'Demanda (MW)'</span>)
+ax.set_title(<span class="string">'Demanda el&eacute;ctrica de CR (modelo)'</span>)
+ax.legend()
+ax.grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+plt.show()
+                    </div>
+                    <div>
+                        <div class="three-columns">
+                            <div class="ml-card">
+                                <div class="badge">A</div>
+                                <h4>Amplitud</h4>
+                                <p>(m&aacute;x &minus; m&iacute;n) / 2. Distancia desde la l&iacute;nea base hasta el pico. En CR: A = 400 MW.</p>
+                            </div>
+                            <div class="ml-card">
+                                <div class="badge">B</div>
+                                <h4>Frecuencia angular</h4>
+                                <p>B = 2&pi;/T donde T es el per&iacute;odo. Para ciclo diario T=24, B=&pi;/12.</p>
+                            </div>
+                            <div class="ml-card">
+                                <div class="badge">C</div>
+                                <h4>Desfase</h4>
+                                <p>Cu&aacute;nto se desplaza horizontalmente. C=6 hace que el m&aacute;ximo ocurra al mediod&iacute;a.</p>
+                            </div>
+                        </div>
+                        <div class="ml-card" style="margin-top: 15px;">
+                            <div class="badge">D</div>
+                            <h4>Desplazamiento vertical (l&iacute;nea base)</h4>
+                            <p>(m&aacute;x + m&iacute;n) / 2. Es el promedio alrededor del cual oscila la se&ntilde;al. En CR: D = 1200 MW (demanda promedio).</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Saber calcular A, B, C, D a mano nos da intuici&oacute;n. Cuando ajustamos a datos reales, scipy.optimize.curve_fit los encuentra autom&aacute;ticamente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 6: EFECTO DE A Y B ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Efecto de la amplitud A y la frecuencia B</h2>
+                <p class="slide-subtitle">C&oacute;mo cambia la onda al modificar cada par&aacute;metro</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+x = np.linspace(<span class="number">0</span>, <span class="number">4</span>*np.pi, <span class="number">500</span>)
+
+fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">14</span>, <span class="number">5</span>),
+                          layout=<span class="string">'constrained'</span>)
+
+<span class="comment"># === Efecto de la amplitud A ===</span>
+<span class="keyword">for</span> A <span class="keyword">in</span> [<span class="number">0.5</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]:
+    axes[<span class="number">0</span>].plot(x, A*np.sin(x),
+                  lw=<span class="number">2</span>, label=<span class="string">f'A = {A}'</span>)
+axes[<span class="number">0</span>].set_title(<span class="string">'Efecto de A: estira/comprime vertical'</span>)
+axes[<span class="number">0</span>].set_xlabel(<span class="string">'x'</span>)
+axes[<span class="number">0</span>].set_ylabel(<span class="string">'A &middot; sin(x)'</span>)
+axes[<span class="number">0</span>].grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+axes[<span class="number">0</span>].legend()
+axes[<span class="number">0</span>].axhline(<span class="number">0</span>, color=<span class="string">'k'</span>, lw=<span class="number">0.5</span>)
+
+<span class="comment"># === Efecto de la frecuencia B ===</span>
+<span class="keyword">for</span> B <span class="keyword">in</span> [<span class="number">0.5</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>]:
+    T = <span class="number">2</span>*np.pi/B
+    axes[<span class="number">1</span>].plot(x, np.sin(B*x),
+                  lw=<span class="number">2</span>, label=<span class="string">f'B={B}, T={T:.2f}'</span>)
+axes[<span class="number">1</span>].set_title(<span class="string">'Efecto de B: cambia el per&iacute;odo'</span>)
+axes[<span class="number">1</span>].set_xlabel(<span class="string">'x'</span>)
+axes[<span class="number">1</span>].set_ylabel(<span class="string">'sin(B &middot; x)'</span>)
+axes[<span class="number">1</span>].grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+axes[<span class="number">1</span>].legend()
+
+plt.show()
+                    </div>
+                    <div>
+                        <div class="key-point">
+                            <h4>Amplitud A</h4>
+                            <p>Multiplica todos los valores de la onda por A. La forma es id&eacute;ntica pero estirada (A &gt; 1) o comprimida (A &lt; 1) verticalmente. Si A es negativo, la onda se refleja respecto al eje x.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Frecuencia angular B</h4>
+                            <p>Comprime o estira horizontalmente. B grande &rarr; ondas apretadas (per&iacute;odo corto). B peque&ntilde;o &rarr; ondas estiradas (per&iacute;odo largo). La regla siempre es: <strong>T = 2&pi; / B</strong>.</p>
+                        </div>
+                        <div class="comparison-table" style="margin-top: 12px;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Per&iacute;odo deseado</th>
+                                        <th>Valor de B</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>24 h (ciclo diario)</td>
+                                        <td>&pi;/12 &asymp; 0.262</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7 d&iacute;as (semanal)</td>
+                                        <td>2&pi;/7 &asymp; 0.898</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12 meses (anual)</td>
+                                        <td>&pi;/6 &asymp; 0.524</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12.4 h (mareas)</td>
+                                        <td>2&pi;/12.4 &asymp; 0.507</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 7: EFECTO DE C Y D ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Efecto del desfase C y la l&iacute;nea base D</h2>
+                <p class="slide-subtitle">D&oacute;nde ocurre el m&aacute;ximo y alrededor de qu&eacute; valor oscila</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+x = np.linspace(<span class="number">0</span>, <span class="number">4</span>*np.pi, <span class="number">500</span>)
+
+fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">14</span>, <span class="number">5</span>),
+                          layout=<span class="string">'constrained'</span>)
+
+<span class="comment"># === Efecto del desfase C ===</span>
+<span class="keyword">for</span> C <span class="keyword">in</span> [<span class="number">0</span>, np.pi/<span class="number">4</span>, np.pi/<span class="number">2</span>, np.pi]:
+    axes[<span class="number">0</span>].plot(x, np.sin(x - C),
+                  lw=<span class="number">2</span>, label=<span class="string">f'C = {C:.2f}'</span>)
+axes[<span class="number">0</span>].set_title(<span class="string">'Efecto de C: desplaza horizontal'</span>)
+axes[<span class="number">0</span>].set_xlabel(<span class="string">'x'</span>)
+axes[<span class="number">0</span>].set_ylabel(<span class="string">'sin(x - C)'</span>)
+axes[<span class="number">0</span>].grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+axes[<span class="number">0</span>].legend()
+axes[<span class="number">0</span>].axhline(<span class="number">0</span>, color=<span class="string">'k'</span>, lw=<span class="number">0.5</span>)
+
+<span class="comment"># === Efecto del desplazamiento vertical D ===</span>
+<span class="keyword">for</span> D <span class="keyword">in</span> [-<span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>]:
+    axes[<span class="number">1</span>].plot(x, np.sin(x) + D,
+                  lw=<span class="number">2</span>, label=<span class="string">f'D = {D}'</span>)
+    axes[<span class="number">1</span>].axhline(D, ls=<span class="string">'--'</span>, alpha=<span class="number">0.3</span>)
+axes[<span class="number">1</span>].set_title(<span class="string">'Efecto de D: l&iacute;nea base'</span>)
+axes[<span class="number">1</span>].set_xlabel(<span class="string">'x'</span>)
+axes[<span class="number">1</span>].set_ylabel(<span class="string">'sin(x) + D'</span>)
+axes[<span class="number">1</span>].grid(<span class="keyword">True</span>, alpha=<span class="number">0.3</span>)
+axes[<span class="number">1</span>].legend()
+
+plt.show()
+                    </div>
+                    <div>
+                        <div class="key-point">
+                            <h4>Desfase C</h4>
+                            <p>Desplaza la onda horizontalmente. C &gt; 0 mueve la onda hacia la derecha, C &lt; 0 hacia la izquierda. En datos temporales, captura "cu&aacute;ndo" ocurre el pico.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>L&iacute;nea base D</h4>
+                            <p>Sube o baja toda la onda. Es el valor promedio alrededor del cual oscila la se&ntilde;al. La amplitud A se mide desde D hasta el pico, no desde 0.</p>
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>F&oacute;rmulas pr&aacute;cticas</h4>
+                            <p>D = (m&aacute;x + m&iacute;n) / 2 (promedio)<br>
+                            A = (m&aacute;x &minus; m&iacute;n) / 2 (semi-amplitud)<br>
+                            B = 2&pi; / T (a partir del per&iacute;odo)<br>
+                            C = ubicaci&oacute;n del primer m&aacute;ximo (para forma factorizada con sin)</p>
+                        </div>
+                        <div class="highlight-box">
+                            <p>Con A, B, C, D podemos describir cualquier oscilaci&oacute;n peri&oacute;dica del mundo real: temperatura, mareas, demanda el&eacute;ctrica, contaminaci&oacute;n, ventas estacionales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 8: SYMPY IDENTIDADES + ECUACIONES ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Identidades y ecuaciones trigonom&eacute;tricas en SymPy</h2>
+                <p class="slide-subtitle">Verificaci&oacute;n simb&oacute;lica y soluci&oacute;n en intervalos</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="code-box">
+<span class="keyword">from</span> sympy <span class="keyword">import</span> *
+
+x = symbols(<span class="string">'x'</span>)
 
 <span class="comment"># === Verificar identidad pitag&oacute;rica ===</span>
-expr = sp.sin(x)**<span class="number">2</span> + sp.cos(x)**<span class="number">2</span>
-<span class="keyword">print</span>(sp.trigsimp(expr))  <span class="comment"># &rarr; 1</span>
+expr = sin(x)**<span class="number">2</span> + cos(x)**<span class="number">2</span>
+<span class="keyword">print</span>(trigsimp(expr))  <span class="comment"># &rarr; 1</span>
 
-<span class="comment"># === Expandir identidades de suma ===</span>
-<span class="keyword">print</span>(sp.expand_trig(sp.sin(x + y)))
-<span class="comment"># &rarr; sin(x)cos(y) + sin(y)cos(x)</span>
-
-<span class="keyword">print</span>(sp.expand_trig(sp.cos(x + y)))
-<span class="comment"># &rarr; cos(x)cos(y) - sin(x)sin(y)</span>
+<span class="comment"># === Expandir identidad de suma ===</span>
+<span class="keyword">print</span>(expand_trig(sin(x + pi/<span class="number">3</span>)))
+<span class="comment"># &rarr; sin(x)/2 + sqrt(3)*cos(x)/2</span>
 
 <span class="comment"># === &Aacute;ngulo doble ===</span>
-<span class="keyword">print</span>(sp.expand_trig(sp.sin(<span class="number">2</span>*x)))
-<span class="comment"># &rarr; 2*sin(x)*cos(x)</span>
-
-<span class="keyword">print</span>(sp.expand_trig(sp.cos(<span class="number">2</span>*x)))
+<span class="keyword">print</span>(expand_trig(cos(<span class="number">2</span>*x)))
 <span class="comment"># &rarr; 2*cos(x)**2 - 1</span>
 
-<span class="comment"># === Simplificaci&oacute;n inversa ===</span>
-expr2 = sp.sin(x)*sp.cos(y) + sp.cos(x)*sp.sin(y)
-<span class="keyword">print</span>(sp.trigsimp(expr2))
-<span class="comment"># &rarr; sin(x + y)</span>
+<span class="comment"># === Resolver ecuaci&oacute;n en [0, 2&pi;) ===</span>
+sol1 = solveset(<span class="number">2</span>*sin(x)**<span class="number">2</span> - <span class="number">1</span>, x,
+                 domain=Interval(<span class="number">0</span>, <span class="number">2</span>*pi,
+                 <span class="keyword">False</span>, <span class="keyword">True</span>))
+<span class="keyword">print</span>(sol1)
+<span class="comment"># &rarr; {&pi;/4, 3&pi;/4, 5&pi;/4, 7&pi;/4}</span>
 
-<span class="comment"># === Simplificaci&oacute;n avanzada ===</span>
-expr3 = sp.sin(x)*sp.tan(x)/sp.sec(x)
-<span class="keyword">print</span>(sp.trigsimp(expr3))
-<span class="comment"># &rarr; sin(x)**2</span>
+<span class="comment"># === Factorizaci&oacute;n con sustituci&oacute;n ===</span>
+<span class="comment"># 2cos&sup2;(x) + cos(x) - 1 = 0</span>
+sol2 = solveset(<span class="number">2</span>*cos(x)**<span class="number">2</span> + cos(x) - <span class="number">1</span>, x,
+                 domain=Interval(<span class="number">0</span>, <span class="number">2</span>*pi,
+                 <span class="keyword">False</span>, <span class="keyword">True</span>))
+<span class="keyword">print</span>(sol2)
+<span class="comment"># &rarr; {&pi;/3, &pi;, 5&pi;/3}</span>
                     </div>
                     <div>
                         <div class="comparison-table">
@@ -763,109 +955,52 @@ expr3 = sp.sin(x)*sp.tan(x)/sp.sec(x)
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><code>sp.trigsimp(expr)</code></td>
-                                        <td>Simplifica: reduce a forma m&aacute;s simple</td>
+                                        <td><code>trigsimp(expr)</code></td>
+                                        <td>Simplifica expresiones trigonom&eacute;tricas</td>
                                     </tr>
                                     <tr>
-                                        <td><code>sp.expand_trig(expr)</code></td>
-                                        <td>Expande: sin(A+B) &rarr; componentes</td>
+                                        <td><code>expand_trig(expr)</code></td>
+                                        <td>Expande sin(A+B), cos(2x), etc.</td>
                                     </tr>
                                     <tr>
-                                        <td><code>expr.rewrite(sp.cos)</code></td>
-                                        <td>Reescribe todo en t&eacute;rminos de cos</td>
+                                        <td><code>solveset(eq, x, domain)</code></td>
+                                        <td>Resuelve ecuaciones en un intervalo</td>
                                     </tr>
                                     <tr>
-                                        <td><code>sp.trigsimp(inverse=True)</code></td>
-                                        <td>Cancela asin(sin(x)) &rarr; x</td>
+                                        <td><code>Interval(0, 2*pi, False, True)</code></td>
+                                        <td>Intervalo [0, 2&pi;) (cerrado-abierto)</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="key-point" style="margin-top: 15px;">
-                            <h4>trigsimp vs expand_trig</h4>
-                            <p><code>trigsimp()</code> <strong>comprime</strong>: convierte sumas de productos en funciones de sumas. <code>expand_trig()</code> <strong>expande</strong>: descompone sin(A+B) en sus componentes. Son operaciones inversas.</p>
+                            <h4>Conexi&oacute;n con la teor&iacute;a</h4>
+                            <p>SymPy hace exactamente las mismas manipulaciones simb&oacute;licas que hicimos a mano: identidad pitag&oacute;rica, factorizaci&oacute;n con sustituci&oacute;n u = cos(x), soluciones generales con +2n&pi;.</p>
                         </div>
-                        <div class="highlight-box">
-                            <p>SymPy verifica identidades autom&aacute;ticamente. Si trigsimp(expresi&oacute;n) da un resultado simple (como 1), acabamos de demostrar una identidad.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== SLIDE 6: ECUACIONES TRIG EN SYMPY ==================== -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Ecuaciones trigonom&eacute;tricas con SymPy</h2>
-                <p class="slide-subtitle">solveset() para soluciones generales y en intervalos</p>
-            </div>
-            <div class="slide-content">
-                <div class="two-columns">
-                    <div class="code-box">
-<span class="keyword">from</span> sympy <span class="keyword">import</span> *
-
-x = symbols(<span class="string">'x'</span>)
-
-<span class="comment"># === sin(x) = 1/2: soluci&oacute;n general ===</span>
-sol = solveset(sin(x) - Rational(<span class="number">1</span>,<span class="number">2</span>), x,
-               domain=S.Reals)
-<span class="keyword">print</span>(sol)
-<span class="comment"># Union(ImageSet(n, 2n&pi;+&pi;/6),</span>
-<span class="comment">#        ImageSet(n, 2n&pi;+5&pi;/6))</span>
-
-<span class="comment"># === sin(x) = 1/2 en [0, 2&pi;) ===</span>
-sol_int = solveset(sin(x) - Rational(<span class="number">1</span>,<span class="number">2</span>), x,
-                    domain=Interval(<span class="number">0</span>, <span class="number">2</span>*pi,
-                    <span class="keyword">False</span>, <span class="keyword">True</span>))
-<span class="keyword">print</span>(sol_int)  <span class="comment"># {&pi;/6, 5&pi;/6}</span>
-
-<span class="comment"># === 2sin&sup2;(x) - 1 = 0 en [0, 2&pi;) ===</span>
-sol2 = solveset(<span class="number">2</span>*sin(x)**<span class="number">2</span> - <span class="number">1</span>, x,
-                 domain=Interval(<span class="number">0</span>, <span class="number">2</span>*pi,
-                 <span class="keyword">False</span>, <span class="keyword">True</span>))
-<span class="keyword">print</span>(sol2)
-<span class="comment"># {&pi;/4, 3&pi;/4, 5&pi;/4, 7&pi;/4}</span>
-
-<span class="comment"># === cos(2x) = cos(x) en [0, 2&pi;) ===</span>
-sol3 = solveset(cos(<span class="number">2</span>*x) - cos(x), x,
-                 domain=Interval(<span class="number">0</span>, <span class="number">2</span>*pi,
-                 <span class="keyword">False</span>, <span class="keyword">True</span>))
-<span class="keyword">print</span>(sol3)
-                    </div>
-                    <div>
                         <div class="output-box">
-sin(x) = 1/2 en [0, 2&pi;): {&pi;/6, 5&pi;/6}
-
-2sin&sup2;(x) - 1 = 0: {&pi;/4, 3&pi;/4, 5&pi;/4, 7&pi;/4}
-                        </div>
-                        <div class="key-point" style="margin-top: 15px;">
-                            <h4>Interval(0, 2*pi, False, True)</h4>
-                            <p>El tercer argumento indica si el extremo izquierdo es abierto (<code>False</code> = cerrado). El cuarto, si el derecho es abierto (<code>True</code> = abierto). As&iacute; obtenemos [0, 2&pi;).</p>
-                        </div>
-                        <div class="key-point" style="margin-top: 12px;">
-                            <h4>Rational(1, 2) vs 0.5</h4>
-                            <p>Usar <code>Rational(1, 2)</code> o <code>S(1)/2</code> para obtener soluciones exactas. Con <code>0.5</code> (flotante), SymPy puede dar aproximaciones num&eacute;ricas en vez de fracciones de &pi;.</p>
+{&pi;/4, 3&pi;/4, 5&pi;/4, 7&pi;/4}
+{&pi;/3, &pi;, 5&pi;/3}
                         </div>
                         <div class="highlight-box">
-                            <p>Aplicaci&oacute;n: si modelamos generaci&oacute;n solar como P(t) = A&middot;sin(2&pi;t/24 &minus; &pi;/2), resolver P(t) = umbral nos dice las horas del d&iacute;a en que la generaci&oacute;n supera ese nivel.</p>
+                            <p>Aplicaci&oacute;n: si modelamos la generaci&oacute;n solar como P(t) = A&middot;sin(B(t&minus;C))+D, resolver P(t) = umbral nos dice las horas en que la generaci&oacute;n supera ese nivel.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 7: DIVISOR SECCION ==================== -->
+        <!-- ==================== SLIDE 9: DIVISOR ==================== -->
         <div class="slide section-divider">
-            <p class="section-label">Aplicaciones en ciencia de datos</p>
-            <h2 class="section-title">Codificaci&oacute;n c&iacute;clica</h2>
-            <p class="section-subtitle">Transformar hora, d&iacute;a y mes en features que respetan la periodicidad</p>
+            <p class="section-label">Aplicaciones a ciencia de datos</p>
+            <h2 class="section-title">De la sinusoide al modelo real</h2>
+            <p class="section-subtitle">Codificaci&oacute;n c&iacute;clica, ajuste con curve_fit y aplicaciones a ML moderno</p>
         </div>
 
-        <!-- ==================== SLIDE 8: CODIFICACION CICLICA ==================== -->
+        <!-- ==================== SLIDE 10: CODIFICACION CICLICA ==================== -->
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Codificaci&oacute;n c&iacute;clica de variables temporales</h2>
-                <p class="slide-subtitle">El problema: hora 23 est&aacute; cerca de hora 0, pero num&eacute;ricamente parecen lejanas</p>
+                <p class="slide-subtitle">El "problema de medianoche" y c&oacute;mo resolverlo</p>
             </div>
             <div class="slide-content">
                 <div class="two-columns">
@@ -874,7 +1009,7 @@ sin(x) = 1/2 en [0, 2&pi;): {&pi;/6, 5&pi;/6}
 <span class="keyword">import</span> pandas <span class="keyword">as</span> pd
 
 <span class="keyword">def</span> <span class="func">codificar_ciclico</span>(df, columna, periodo):
-    <span class="comment">"""Codifica variable c&iacute;clica con sin/cos."""</span>
+    <span class="comment">"""Mapea una variable c&iacute;clica al c&iacute;rculo unitario."""</span>
     df[<span class="string">f'{columna}_sin'</span>] = np.sin(
         <span class="number">2</span> * np.pi * df[columna] / periodo)
     df[<span class="string">f'{columna}_cos'</span>] = np.cos(
@@ -890,106 +1025,107 @@ h23 = np.array([df.loc[<span class="number">23</span>, <span class="string">'hor
                 df.loc[<span class="number">23</span>, <span class="string">'hora_cos'</span>]])
 h0 = np.array([df.loc[<span class="number">0</span>, <span class="string">'hora_sin'</span>],
                df.loc[<span class="number">0</span>, <span class="string">'hora_cos'</span>]])
-dist = np.linalg.norm(h23 - h0)
-<span class="keyword">print</span>(<span class="string">f"Distancia 23&rarr;0: {dist:.3f}"</span>)
-<span class="comment"># &asymp; 0.264 (cerca, como debe ser)</span>
+<span class="keyword">print</span>(<span class="string">f"Distancia 23&rarr;0: {np.linalg.norm(h23-h0):.3f}"</span>)
+<span class="comment"># &asymp; 0.261 (cerca, como debe ser)</span>
 
-<span class="comment"># Comparar: distancia 23&rarr;12</span>
-h12 = np.array([df.loc[<span class="number">12</span>, <span class="string">'hora_sin'</span>],
-                df.loc[<span class="number">12</span>, <span class="string">'hora_cos'</span>]])
-dist2 = np.linalg.norm(h23 - h12)
-<span class="keyword">print</span>(<span class="string">f"Distancia 23&rarr;12: {dist2:.3f}"</span>)
-<span class="comment"># &asymp; 1.802 (lejos, correcto)</span>
+<span class="comment"># Comparar con codificaci&oacute;n cruda</span>
+<span class="keyword">print</span>(<span class="string">f"Distancia cruda |23-0|: {abs(23-0)}"</span>)
+<span class="comment"># &asymp; 23 (incorrecto: parecen muy lejanas)</span>
+
+<span class="comment"># Per&iacute;odos comunes:</span>
+<span class="comment"># hora &rarr; 24, d&iacute;a semana &rarr; 7,</span>
+<span class="comment"># mes &rarr; 12, d&iacute;a del a&ntilde;o &rarr; 365.25</span>
                     </div>
                     <div>
                         <div class="key-point">
-                            <h4>El problema</h4>
-                            <p>Si usamos la hora como n&uacute;mero crudo (0, 1, ..., 23), un modelo de ML pensar&iacute;a que hora 23 y hora 0 est&aacute;n a distancia 23. Pero en realidad est&aacute;n a 1 hora de diferencia.</p>
+                            <h4>El problema de medianoche</h4>
+                            <p>Si codificamos la hora como un n&uacute;mero (0, 1, ..., 23), un modelo de ML cree que la hora 23 est&aacute; a 23 unidades de la hora 0. Pero en realidad est&aacute;n a 1 hora de distancia.</p>
                         </div>
                         <div class="key-point" style="margin-top: 12px;">
-                            <h4>La soluci&oacute;n: mapear al c&iacute;rculo unitario</h4>
-                            <p>x<sub>sin</sub> = sin(2&pi; &middot; x / T), x<sub>cos</sub> = cos(2&pi; &middot; x / T), donde T es el per&iacute;odo. Cada valor se convierte en un punto <strong>&uacute;nico</strong> del c&iacute;rculo unitario (sin, cos).</p>
+                            <h4>La soluci&oacute;n: el c&iacute;rculo unitario</h4>
+                            <p>x<sub>sin</sub> = sin(2&pi;&middot;x/T), x<sub>cos</sub> = cos(2&pi;&middot;x/T). Cada valor se mapea a un punto &uacute;nico (sin, cos) sobre el c&iacute;rculo unitario.</p>
                         </div>
                         <div class="key-point" style="margin-top: 12px;">
-                            <h4>&iquest;Por qu&eacute; necesitamos AMBAS componentes?</h4>
-                            <p>Solo con seno: sin(6h) = sin(18h) para T=24. No podr&iacute;amos distinguir las 6am de las 6pm. El coseno rompe esa ambig&uuml;edad: cos(6h) &ne; cos(18h).</p>
+                            <h4>&iquest;Por qu&eacute; ambas componentes?</h4>
+                            <p>Solo con seno: sin(2&pi;&middot;6/24) = sin(2&pi;&middot;18/24) en algunos casos. Las 6 a.m. y las 6 p.m. quedar&iacute;an confundidas. El coseno rompe la ambig&uuml;edad.</p>
                         </div>
                         <div class="highlight-box">
-                            <p>Per&iacute;odos comunes: hora &rarr; T=24, d&iacute;a de semana &rarr; T=7, mes &rarr; T=12, d&iacute;a del a&ntilde;o &rarr; T=365.25. Esto aplica directamente en sus proyectos.</p>
+                            <p>Reducci&oacute;n de dimensionalidad: codificar hora + d&iacute;a + mes + d&iacute;a del a&ntilde;o con one-hot necesita 408 columnas. Con sin/cos solo 8 columnas. Reducci&oacute;n del 98%.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 9: APLICACION CR ==================== -->
+        <!-- ==================== SLIDE 11: AJUSTE SINUSOIDAL ==================== -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Aplicaci&oacute;n CR: radar chart de energ&iacute;a + codificaci&oacute;n temporal</h2>
-                <p class="slide-subtitle">Datos CENCE/ICE y BCCR con funciones trigonom&eacute;tricas</p>
+                <h2 class="slide-title">Ajuste sinusoidal con curve_fit</h2>
+                <p class="slide-subtitle">Encontrar A, B, C, D autom&aacute;ticamente desde datos reales</p>
             </div>
             <div class="slide-content">
                 <div class="two-columns">
                     <div class="code-box">
 <span class="keyword">import</span> numpy <span class="keyword">as</span> np
 <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+<span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> curve_fit
 
-<span class="comment"># === Radar chart: matriz energ&eacute;tica CR ===</span>
-fuentes = [<span class="string">'Hidro'</span>, <span class="string">'E&oacute;lica'</span>, <span class="string">'Geo'</span>,
-           <span class="string">'Solar'</span>, <span class="string">'Biomasa'</span>, <span class="string">'T&eacute;rmica'</span>]
-pcts = [<span class="number">67.5</span>, <span class="number">15.3</span>, <span class="number">13.8</span>, <span class="number">1.8</span>, <span class="number">0.9</span>, <span class="number">0.7</span>]
+<span class="comment"># === Modelo a ajustar ===</span>
+<span class="keyword">def</span> <span class="func">sinusoide</span>(t, A, B, C, D):
+    <span class="keyword">return</span> A * np.sin(B * (t - C)) + D
 
-<span class="comment"># &Aacute;ngulos equidistantes en el c&iacute;rculo</span>
-n = len(fuentes)
-angulos = np.linspace(<span class="number">0</span>, <span class="number">2</span>*np.pi, n,
-                       endpoint=<span class="keyword">False</span>).tolist()
+<span class="comment"># === Datos simulados de demanda CR ===</span>
+np.random.seed(<span class="number">42</span>)
+t_obs = np.arange(<span class="number">0</span>, <span class="number">48</span>, <span class="number">0.5</span>)  <span class="comment"># 2 d&iacute;as</span>
+y_real = sinusoide(t_obs, <span class="number">400</span>, np.pi/<span class="number">12</span>, <span class="number">6</span>, <span class="number">1200</span>)
+y_obs = y_real + np.random.normal(<span class="number">0</span>, <span class="number">30</span>, len(t_obs))
 
-<span class="comment"># Cerrar el pol&iacute;gono</span>
-vals = pcts + pcts[:<span class="number">1</span>]
-angulos += angulos[:<span class="number">1</span>]
+<span class="comment"># === Estimaciones iniciales (CR&Iacute;TICO) ===</span>
+A0 = (y_obs.max() - y_obs.min()) / <span class="number">2</span>  <span class="comment"># &asymp; 400</span>
+D0 = y_obs.mean()                       <span class="comment"># &asymp; 1200</span>
+B0 = <span class="number">2</span> * np.pi / <span class="number">24</span>                  <span class="comment"># per&iacute;odo conocido</span>
+C0 = <span class="number">6</span>
+p0 = [A0, B0, C0, D0]
 
-fig, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">7</span>),
-    subplot_kw=<span class="keyword">dict</span>(polar=<span class="keyword">True</span>))
-ax.plot(angulos, vals, <span class="string">'o-'</span>, lw=<span class="number">2</span>,
-        color=<span class="string">'#006847'</span>)
-ax.fill(angulos, vals, alpha=<span class="number">0.25</span>,
-        color=<span class="string">'#006847'</span>)
-ax.set_thetagrids(
-    np.degrees(angulos[:-<span class="number">1</span>]), fuentes)
-ax.set_theta_offset(np.pi/<span class="number">2</span>)
-ax.set_theta_direction(-<span class="number">1</span>)
-ax.set_title(<span class="string">'Matriz energ&eacute;tica de CR'</span>)
-plt.show()
+<span class="comment"># === Ajuste de m&iacute;nimos cuadrados no lineales ===</span>
+popt, pcov = curve_fit(sinusoide, t_obs, y_obs, p0=p0)
+A_fit, B_fit, C_fit, D_fit = popt
+<span class="keyword">print</span>(<span class="string">f"A={A_fit:.1f}, B={B_fit:.3f}, "</span>
+      <span class="string">f"C={C_fit:.2f}, D={D_fit:.1f}"</span>)
+
+<span class="comment"># === R&sup2; (bondad de ajuste) ===</span>
+y_pred = sinusoide(t_obs, *popt)
+ss_res = np.sum((y_obs - y_pred)**<span class="number">2</span>)
+ss_tot = np.sum((y_obs - y_obs.mean())**<span class="number">2</span>)
+r2 = <span class="number">1</span> - ss_res/ss_tot
+<span class="keyword">print</span>(<span class="string">f"R&sup2; = {r2:.4f}"</span>)
                     </div>
                     <div>
                         <div class="key-point">
-                            <h4>&Aacute;ngulos equidistantes</h4>
-                            <p>Cada variable se ubica a &theta;<sub>i</sub> = 2&pi;i/n. Con 6 fuentes: 0&deg;, 60&deg;, 120&deg;, 180&deg;, 240&deg;, 300&deg;. Esto es exactamente el c&iacute;rculo unitario con n puntos.</p>
+                            <h4>curve_fit en una l&iacute;nea</h4>
+                            <p>Recibe la funci&oacute;n del modelo, los datos x, los datos y y unas estimaciones iniciales p0. Devuelve los par&aacute;metros &oacute;ptimos popt y la matriz de covarianza pcov.</p>
                         </div>
                         <div class="key-point" style="margin-top: 12px;">
-                            <h4>Proyecci&oacute;n polar en Matplotlib</h4>
-                            <p><code>subplot_kw=dict(polar=True)</code> activa coordenadas polares. <code>set_theta_offset(&pi;/2)</code> pone el 0&deg; arriba. <code>set_theta_direction(-1)</code> gira en sentido horario.</p>
+                            <h4>Las estimaciones iniciales son cr&iacute;ticas</h4>
+                            <p>curve_fit usa Levenberg&ndash;Marquardt, que puede atascarse en m&iacute;nimos locales. La estrategia es: D0 = promedio, A0 = (m&aacute;x&minus;m&iacute;n)/2, B0 desde el per&iacute;odo conocido (o desde la FFT), C0 razonable.</p>
                         </div>
-                        <div class="content-box" style="margin-top: 12px;">
-                            <h3>Generaci&oacute;n solar: sinusoide casi perfecta</h3>
-                            <p>Los datos del CENCE muestran que la generaci&oacute;n solar sigue un patr&oacute;n P(t) &asymp; A&middot;sin(2&pi;t/24 &minus; &pi;/2): cero en la noche, m&aacute;ximo al mediod&iacute;a, y sigue la forma de una sinusoide positiva. La generaci&oacute;n e&oacute;lica tiene un patr&oacute;n complementario, desfasado aproximadamente &pi; radianes respecto a la solar.</p>
+                        <div class="output-box">
+A=400.2, B=0.262, C=6.01, D=1200.1
+R&sup2; = 0.9876
+                        </div>
+                        <div class="key-point" style="margin-top: 12px;">
+                            <h4>Calidad del ajuste con R&sup2;</h4>
+                            <p>El R&sup2; mide qu&eacute; fracci&oacute;n de la varianza de los datos explica el modelo. R&sup2; &gt; 0.95 en datos peri&oacute;dicos es excelente. Es la misma m&eacute;trica que vimos en regresi&oacute;n lineal y polinomial.</p>
                         </div>
                         <div class="highlight-box">
-                            <p>Estos patrones c&iacute;clicos son ideales para aplicar codificaci&oacute;n sin/cos. Si su proyecto usa datos temporales, esta t&eacute;cnica mejora significativamente los modelos.</p>
+                            <p>Esta es la t&eacute;cnica est&aacute;ndar en ciencia de datos para modelar cualquier se&ntilde;al peri&oacute;dica: mareas, demanda el&eacute;ctrica, temperatura, ventas estacionales, llegadas tur&iacute;sticas.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 10: DIVISOR SECCION ==================== -->
-        <div class="slide section-divider">
-            <p class="section-label">Machine learning</p>
-            <h2 class="section-title">Trigonometr&iacute;a en el coraz&oacute;n del ML</h2>
-            <p class="section-subtitle">Codificaci&oacute;n posicional, activaciones y similaridad coseno</p>
-        </div>
-
-        <!-- ==================== SLIDE 11: CODIFICACION POSICIONAL ==================== -->
+        <!-- ==================== SLIDE 12: POSITIONAL ENCODING ==================== -->
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Codificaci&oacute;n posicional en transformers</h2>
@@ -1002,13 +1138,13 @@ plt.show()
 <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
 
 <span class="keyword">def</span> <span class="func">codificacion_posicional</span>(max_len, d_model):
-    <span class="comment">"""Codificaci&oacute;n posicional sinusoidal."""</span>
+    <span class="comment">"""Codificaci&oacute;n posicional sinusoidal de Vaswani 2017."""</span>
     pe = np.zeros((max_len, d_model))
     pos = np.arange(max_len)[:, np.newaxis]
     div = np.exp(np.arange(<span class="number">0</span>, d_model, <span class="number">2</span>)
                  * -(np.log(<span class="number">10000</span>) / d_model))
-    pe[:, <span class="number">0</span>::<span class="number">2</span>] = np.sin(pos * div)  <span class="comment"># pares</span>
-    pe[:, <span class="number">1</span>::<span class="number">2</span>] = np.cos(pos * div)  <span class="comment"># impares</span>
+    pe[:, <span class="number">0</span>::<span class="number">2</span>] = np.sin(pos * div)  <span class="comment"># dim pares</span>
+    pe[:, <span class="number">1</span>::<span class="number">2</span>] = np.cos(pos * div)  <span class="comment"># dim impares</span>
     <span class="keyword">return</span> pe
 
 <span class="comment"># Generar y visualizar</span>
@@ -1016,119 +1152,54 @@ pe = codificacion_posicional(<span class="number">50</span>, <span class="number
 
 fig, ax = plt.subplots(figsize=(<span class="number">12</span>, <span class="number">5</span>),
                         layout=<span class="string">'constrained'</span>)
-im = ax.imshow(pe, aspect=<span class="string">'auto'</span>,
-               cmap=<span class="string">'RdYlBu'</span>)
+im = ax.imshow(pe, aspect=<span class="string">'auto'</span>, cmap=<span class="string">'RdYlBu'</span>)
 ax.set_xlabel(<span class="string">'Dimensi&oacute;n del modelo'</span>)
-ax.set_ylabel(<span class="string">'Posici&oacute;n de la palabra'</span>)
-ax.set_title(<span class="string">'Codificaci&oacute;n posicional sinusoidal'</span>)
+ax.set_ylabel(<span class="string">'Posici&oacute;n del token'</span>)
+ax.set_title(<span class="string">'Positional encoding sinusoidal'</span>)
 fig.colorbar(im, ax=ax)
 plt.show()
+
+<span class="comment"># Cada fila es la "huella" &uacute;nica de una posici&oacute;n</span>
+<span class="comment"># Las primeras dimensiones cambian r&aacute;pido,</span>
+<span class="comment"># las &uacute;ltimas cambian lento</span>
                     </div>
                     <div>
                         <div class="key-point">
-                            <h4>La idea central</h4>
-                            <p>Los transformers procesan todas las palabras en paralelo (no secuencialmente). Necesitan un mecanismo para saber <strong>d&oacute;nde</strong> est&aacute; cada palabra. La soluci&oacute;n: sumar un vector de senos y cosenos &uacute;nico para cada posici&oacute;n.</p>
+                            <h4>El problema</h4>
+                            <p>Los transformers procesan todas las palabras en paralelo. La self-attention es invariante al orden. &iquest;C&oacute;mo le decimos al modelo que "el gato negro" es diferente de "negro gato el"?</p>
                         </div>
                         <div class="key-point" style="margin-top: 12px;">
-                            <h4>Las f&oacute;rmulas</h4>
+                            <h4>La soluci&oacute;n: senos y cosenos</h4>
                             <p>PE(pos, 2i) = sin(pos / 10000<sup>2i/d</sup>)<br>
                             PE(pos, 2i+1) = cos(pos / 10000<sup>2i/d</sup>)<br>
-                            Cada dimensi&oacute;n usa una frecuencia diferente: las primeras cambian r&aacute;pido, las &uacute;ltimas lento.</p>
+                            Cada dimensi&oacute;n usa una frecuencia distinta. Es como un sistema binario continuo.</p>
                         </div>
                         <div class="key-point" style="margin-top: 12px;">
-                            <h4>&iquest;Por qu&eacute; sin y cos?</h4>
-                            <p>Gracias a las identidades de suma: PE(pos+k) es una <strong>rotaci&oacute;n</strong> de PE(pos). Esto permite al modelo aprender relaciones posicionales relativas, no solo absolutas.</p>
+                            <h4>Por qu&eacute; funciona</h4>
+                            <p>Por las identidades de suma sin(A+B) y cos(A+B): la posici&oacute;n (pos+k) es una <strong>rotaci&oacute;n</strong> de la posici&oacute;n pos. El modelo aprende a atender por posici&oacute;n relativa, no absoluta.</p>
                         </div>
                         <div class="highlight-box">
-                            <p>Esta es la aplicaci&oacute;n directa de las identidades de suma que vimos en el iPad: sin(A+B) = sinA&middot;cosB + cosA&middot;sinB es lo que permite que la posici&oacute;n (pos+k) sea una transformaci&oacute;n lineal de la posici&oacute;n (pos).</p>
+                            <p>Esta es la base matem&aacute;tica de RoPE (Rotary Position Embedding), usado por LLaMA, Mistral, Qwen, DeepSeek, Gemma y pr&aacute;cticamente todo LLM moderno. La trigonometr&iacute;a est&aacute; en el coraz&oacute;n de la IA generativa.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 12: HIPERBOLICAS Y ACTIVACIONES ==================== -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Funciones hiperb&oacute;licas y activaciones neuronales</h2>
-                <p class="slide-subtitle">tanh y GELU: la trigonometr&iacute;a dentro de las redes neuronales</p>
-            </div>
-            <div class="slide-content">
-                <div class="two-columns">
-                    <div class="code-box">
-<span class="keyword">import</span> numpy <span class="keyword">as</span> np
-
-x = np.linspace(-<span class="number">5</span>, <span class="number">5</span>, <span class="number">1000</span>)
-
-<span class="comment"># === Funciones hiperb&oacute;licas ===</span>
-sinh = np.sinh(x)   <span class="comment"># (e^x - e^-x)/2</span>
-cosh = np.cosh(x)   <span class="comment"># (e^x + e^-x)/2</span>
-tanh = np.tanh(x)   <span class="comment"># sinh/cosh</span>
-
-<span class="comment"># === tanh como activaci&oacute;n ===</span>
-<span class="comment"># Rango: (-1, 1), centrada en 0</span>
-<span class="comment"># Usada en RNNs, LSTMs</span>
-activacion_tanh = np.tanh(x)
-
-<span class="comment"># === GELU (aprox. tanh) ===</span>
-<span class="comment"># Activaci&oacute;n est&aacute;ndar en BERT, GPT</span>
-<span class="keyword">def</span> <span class="func">gelu</span>(x):
-    <span class="keyword">return</span> <span class="number">0.5</span> * x * (<span class="number">1</span> + np.tanh(
-        np.sqrt(<span class="number">2</span>/np.pi) *
-        (x + <span class="number">0.044715</span> * x**<span class="number">3</span>)))
-
-activacion_gelu = gelu(x)
-
-<span class="comment"># === Identidad hiperb&oacute;lica ===</span>
-check = np.cosh(x)**<span class="number">2</span> - np.sinh(x)**<span class="number">2</span>
-<span class="keyword">print</span>(np.allclose(check, <span class="number">1</span>))  <span class="comment"># True</span>
-<span class="comment"># An&aacute;logo a sin&sup2; + cos&sup2; = 1</span>
-<span class="comment"># pero con signo opuesto: cosh&sup2; - sinh&sup2; = 1</span>
-                    </div>
-                    <div>
-                        <div class="three-columns">
-                            <div class="ml-card">
-                                <div class="badge">tanh</div>
-                                <h4>Rango: (&minus;1, 1)</h4>
-                                <p>Centrada en 0, suave. Usada en RNNs y como gate en LSTMs. tanh(x) = (e<sup>x</sup>&minus;e<sup>&minus;x</sup>)/(e<sup>x</sup>+e<sup>&minus;x</sup>).</p>
-                            </div>
-                            <div class="ml-card">
-                                <div class="badge">GELU</div>
-                                <h4>Activaci&oacute;n de GPT</h4>
-                                <p>GELU(x) &asymp; 0.5x(1+tanh(&radic;(2/&pi;)(x+0.04x&sup3;))). Contiene tanh y la constante &radic;(2/&pi;).</p>
-                            </div>
-                            <div class="ml-card">
-                                <div class="badge">Sigmoid</div>
-                                <h4>&sigma;(x) = (1+tanh(x/2))/2</h4>
-                                <p>La sigmoide se puede escribir en t&eacute;rminos de tanh. Rango: (0, 1). Usada en clasificaci&oacute;n binaria.</p>
-                            </div>
-                        </div>
-                        <div class="key-point" style="margin-top: 15px;">
-                            <h4>Conexi&oacute;n con trig circular</h4>
-                            <p>La relaci&oacute;n entre funciones circulares e hiperb&oacute;licas: <strong>tanh(x) = &minus;i&middot;tan(ix)</strong>. Las hiperb&oacute;licas son las circulares evaluadas en argumentos imaginarios. Misma estructura, diferente geometr&iacute;a.</p>
-                        </div>
-                        <div class="highlight-box">
-                            <p>Cada vez que un LLM genera una palabra, la aproximaci&oacute;n tanh de GELU se calcula billones de veces. La tangente hiperb&oacute;lica del prec&aacute;lculo es infraestructura del deep learning moderno.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== SLIDE 13: SIMILARIDAD COSENO ==================== -->
+        <!-- ==================== SLIDE 13: SIMILARIDAD COSENO Y FOURIER ==================== -->
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Similaridad coseno y an&aacute;lisis de Fourier</h2>
-                <p class="slide-subtitle">La m&eacute;trica trigonom&eacute;trica m&aacute;s usada en ML + detecci&oacute;n de periodicidad</p>
+                <p class="slide-subtitle">M&eacute;tricas y t&eacute;cnicas para comparar y descomponer se&ntilde;ales</p>
             </div>
             <div class="slide-content">
                 <div class="two-columns">
                     <div class="code-box">
 <span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">from</span> scipy.fft <span class="keyword">import</span> rfft, rfftfreq
 
 <span class="comment"># === Similaridad coseno ===</span>
 <span class="keyword">def</span> <span class="func">sim_coseno</span>(a, b):
-    <span class="comment">"""cos(&theta;) entre vectores a y b."""</span>
     <span class="keyword">return</span> np.dot(a, b) / (
         np.linalg.norm(a) * np.linalg.norm(b))
 
@@ -1138,13 +1209,11 @@ san_jose = np.array([<span class="number">0.2</span>,<span class="number">0.3</s
 guanacaste = np.array([<span class="number">0.95</span>,<span class="number">0.2</span>,<span class="number">0.3</span>,<span class="number">0.7</span>,<span class="number">0.5</span>])
 cartago = np.array([<span class="number">0.1</span>,<span class="number">0.9</span>,<span class="number">0.7</span>,<span class="number">0.5</span>,<span class="number">0.4</span>])
 
-<span class="keyword">print</span>(<span class="string">f"SJ-Cartago:    {sim_coseno(san_jose, cartago):.3f}"</span>)
-<span class="keyword">print</span>(<span class="string">f"SJ-Guanacaste: {sim_coseno(san_jose, guanacaste):.3f}"</span>)
+<span class="keyword">print</span>(<span class="string">f"SJ-Cartago:    {sim_coseno(san_jose,cartago):.3f}"</span>)
+<span class="keyword">print</span>(<span class="string">f"SJ-Guanacaste: {sim_coseno(san_jose,guanacaste):.3f}"</span>)
 
 <span class="comment"># === FFT: detectar periodicidad ===</span>
-<span class="keyword">from</span> scipy.fft <span class="keyword">import</span> rfft, rfftfreq
-
-<span class="comment"># Simular turismo mensual (10 a&ntilde;os)</span>
+<span class="comment"># Simular llegadas tur&iacute;sticas mensuales (10 a&ntilde;os)</span>
 meses = np.arange(<span class="number">120</span>)
 turismo = (<span class="number">200000</span> + <span class="number">1000</span>*meses +
     <span class="number">50000</span>*np.sin(<span class="number">2</span>*np.pi*meses/<span class="number">12</span>) +
@@ -1154,74 +1223,72 @@ fft_vals = rfft(turismo - turismo.mean())
 freqs = rfftfreq(len(turismo))
 magnitud = np.abs(fft_vals)
 <span class="comment"># Pico en freq = 1/12 &rarr; per&iacute;odo de 12 meses</span>
+<span class="comment"># confirma estacionalidad anual</span>
                     </div>
                     <div>
                         <div class="key-point">
                             <h4>Similaridad coseno</h4>
-                            <p>cos(&theta;) = (a &middot; b) / (||a|| &middot; ||b||). Mide el &aacute;ngulo entre vectores, no su magnitud. Rango: [&minus;1, 1]. Es la m&eacute;trica est&aacute;ndar en NLP (comparar embeddings de palabras) y en b&uacute;squeda sem&aacute;ntica.</p>
+                            <p>cos(&theta;) = (a&middot;b) / (||a||&middot;||b||). Mide el &aacute;ngulo entre vectores, no su magnitud. Rango: [&minus;1, 1]. Es la m&eacute;trica est&aacute;ndar en NLP, b&uacute;squeda sem&aacute;ntica y RAG.</p>
                         </div>
                         <div class="key-point" style="margin-top: 12px;">
                             <h4>FFT (transformada r&aacute;pida de Fourier)</h4>
-                            <p>Descompone cualquier se&ntilde;al en sus frecuencias componentes. Si una serie temporal tiene estacionalidad, la FFT la detecta como un pico en la frecuencia correspondiente (1/12 para ciclos anuales en datos mensuales).</p>
+                            <p>Descompone cualquier se&ntilde;al peri&oacute;dica en sus frecuencias componentes. Si una serie tiene estacionalidad anual, la FFT la detecta como un pico en la frecuencia 1/12 (en datos mensuales).</p>
                         </div>
                         <div class="key-point" style="margin-top: 12px;">
-                            <h4>Idea de Fourier en una frase</h4>
-                            <p>Cualquier se&ntilde;al peri&oacute;dica se puede escribir como suma de senos y cosenos de diferentes frecuencias. Las identidades trigonom&eacute;tricas de suma son el fundamento algebraico de esta descomposici&oacute;n.</p>
+                            <h4>El teorema de Fourier</h4>
+                            <p>Toda se&ntilde;al peri&oacute;dica se puede escribir como suma de senos y cosenos de diferentes frecuencias. Es la base de Prophet (Meta) para modelar estacionalidad.</p>
                         </div>
                         <div class="highlight-box">
-                            <p>Para sus proyectos: si sospechan que sus datos tienen estacionalidad, usen scipy.fft.rfft() para confirmarla. Los picos en el espectro les dicen exactamente cu&aacute;l es el per&iacute;odo.</p>
+                            <p>Para sus proyectos: si sospechan estacionalidad en sus datos, scipy.fft.rfft() la detecta directamente. Los picos del espectro les dicen exactamente cu&aacute;les son los per&iacute;odos.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 14: RESUMEN ==================== -->
+        <!-- ==================== SLIDE 14: CIERRE ==================== -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Resumen semana 13</h2>
-                <p class="slide-subtitle">De &aacute;ngulos y el c&iacute;rculo unitario a aplicaciones en ML</p>
+                <h2 class="slide-title">Cierre del curso te&oacute;rico</h2>
+                <p class="slide-subtitle">Resumen de la semana 14 y entregables pendientes</p>
             </div>
             <div class="slide-content">
                 <div class="two-columns">
                     <div>
                         <div class="key-point">
-                            <h4>Funciones trigonom&eacute;tricas en NumPy</h4>
-                            <p><code>np.sin()</code>, <code>np.cos()</code>, <code>np.tan()</code>: vectorizadas, siempre en radianes. <code>np.radians()</code> y <code>np.degrees()</code> para convertir. <code>np.arctan2(y, x)</code> para el cuadrante correcto.</p>
+                            <h4>Lo que vimos hoy</h4>
+                            <p>Funciones trigonom&eacute;tricas (sin, cos, tan), sus propiedades y la forma general A&middot;sin(B(x&minus;C))+D con sus cuatro par&aacute;metros: amplitud, frecuencia, desfase y l&iacute;nea base.</p>
                         </div>
                         <div class="key-point" style="margin-top: 12px;">
-                            <h4>Identidades y ecuaciones en SymPy</h4>
-                            <p><code>sp.trigsimp()</code> simplifica, <code>sp.expand_trig()</code> expande. <code>sp.solveset()</code> con <code>Interval(0, 2*pi)</code> para soluciones en un intervalo.</p>
+                            <h4>Aplicaciones a ciencia de datos</h4>
+                            <p>Codificaci&oacute;n c&iacute;clica (resuelve el problema de medianoche), ajuste sinusoidal con curve_fit, codificaci&oacute;n posicional en transformers, similaridad coseno y an&aacute;lisis de Fourier.</p>
                         </div>
                         <div class="key-point" style="margin-top: 12px;">
-                            <h4>Codificaci&oacute;n c&iacute;clica</h4>
-                            <p>x<sub>sin</sub> = sin(2&pi;x/T), x<sub>cos</sub> = cos(2&pi;x/T). Aplicar a hora (T=24), d&iacute;a (T=7), mes (T=12). Necesitan AMBAS componentes para evitar ambig&uuml;edad.</p>
+                            <h4>Herramientas nuevas</h4>
+                            <p><code>np.sin/cos/tan</code>, <code>np.radians/degrees</code>, <code>scipy.optimize.curve_fit</code>, <code>scipy.fft.rfft</code>, <code>sympy.solveset</code> con <code>Interval</code>.</p>
                         </div>
                     </div>
                     <div>
                         <div class="content-box">
                             <h3>Entregables y fechas</h3>
                             <ul>
-                                <li><strong>Taller 5:</strong> fecha de entrega hoy</li>
-                                <li><strong>Quiz 2</strong> (10%): hoy en clase, contenido semanas 7&ndash;12</li>
-                                <li><strong>Semana 14:</strong> funciones trigonom&eacute;tricas (gr&aacute;ficas, amplitud, per&iacute;odo, fase)</li>
-                                <li><strong>Semana 15:</strong> presentaciones finales del proyecto (8%)</li>
+                                <li><strong>Quiz 2</strong> (10%): lunes 20 de abril, 11:59 p.m. Cubre semanas 7&ndash;12</li>
+                                <li><strong>Taller 5</strong> (6%): lunes 20 de abril, exponenciales y logar&iacute;tmicas</li>
+                                <li><strong>Entrega final</strong> del proyecto (4%): semana 15</li>
+                                <li><strong>Presentaci&oacute;n final</strong> del proyecto (8%): semana 15, 12 minutos por grupo</li>
                             </ul>
                         </div>
                         <div class="content-box" style="margin-top: 15px;">
-                            <h3>Herramientas nuevas de hoy</h3>
+                            <h3>Recordatorios para la semana 15</h3>
                             <ul>
-                                <li><code>np.sin()</code>, <code>np.cos()</code>, <code>np.tan()</code> + inversas</li>
-                                <li><code>np.radians()</code>, <code>np.degrees()</code></li>
-                                <li><code>sp.trigsimp()</code>, <code>sp.expand_trig()</code></li>
-                                <li><code>sp.solveset()</code> con <code>Interval</code></li>
-                                <li><code>np.tanh()</code>, <code>np.sinh()</code>, <code>np.cosh()</code></li>
-                                <li><code>scipy.fft.rfft()</code> para an&aacute;lisis de Fourier</li>
-                                <li>Gr&aacute;ficos polares: <code>subplot_kw=dict(polar=True)</code></li>
+                                <li>Llegar con la presentaci&oacute;n lista (todos los miembros participan)</li>
+                                <li>Tener el notebook final del proyecto en Colab</li>
+                                <li>Documento final con conclusiones y recomendaciones</li>
+                                <li>M&iacute;nimo 7 referencias en formato APA 7</li>
                             </ul>
                         </div>
                         <div class="highlight-box" style="margin-top: 15px;">
-                            <p>Pr&oacute;xima semana: funciones trigonom&eacute;tricas en detalle. Amplitud, per&iacute;odo, fase, transformaciones y modelado de datos peri&oacute;dicos con regresi&oacute;n sinusoidal.</p>
+                            <p>Esta es la &uacute;ltima clase te&oacute;rica del curso. La pr&oacute;xima semana son las presentaciones finales de los proyectos. &iexcl;Mucho &eacute;xito en la preparaci&oacute;n!</p>
                         </div>
                     </div>
                 </div>
